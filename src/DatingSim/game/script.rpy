@@ -15,6 +15,12 @@ define victoria = Character("Victoria")
 define august = Character("August")
 define finley = Character("Finley")
 
+<<<<<<< HEAD
+# Have you met a romanceable character?
+default knowAugust = "false"
+
+=======
+>>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
 # Pronoun data setup
 default subj_pron = ""
 default obj_pron = ""
@@ -57,7 +63,7 @@ label start:
 
     # Andrea: Start proper story?
     roomie "Oh my goodness you're here! You're here!"
-    show roommate happy with dissolve
+    show roommate happy with moveinleft
     roomie "You're my new roommate, right?"
 
     # ALEXIS: Name input
@@ -69,7 +75,7 @@ label start:
     roomie "Ah [player_name]! It's so nice to meet you!"
     player "It's nice to meet you too!"
 
-    # ANDREA: Pronoun Selection
+    # # ANDREA: Pronoun Selection
     roomie "Ah, also, what are your pronouns?"
     player "Oh, thanks for asking! I use..."
     menu:
@@ -126,15 +132,12 @@ label start:
     $ portrait_number = _return
 
     roomie "Finished?"
-
     player "Yeah, I'm almost done. Why, what's up?"
-
     roomie "I found this personality quiz on a blog earlier, you should take it!"
 
-    show roommate happy with dissolve
+    show roommate happy with moveinright
 
     player "A personality quiz?"
-
     "She hands you a piece of torn notebook paper with some questions written down on them."
 
     #start of quiz
@@ -146,7 +149,7 @@ label start:
             "Go out to a raging party":
                 $ badboyPoints += 1
                 $ tsunPoints += 1
-
+            
     roomie "Would you rather have"
     menu:
         "A close group of friends":
@@ -173,6 +176,13 @@ label start:
     player "Don't know what?"
     roomie "Who you'd be cuter with!"
     player "What do you mean?"
+<<<<<<< HEAD
+    roomie "My friends! I'd love for you to meet them soon. Some of them have been looking for someone, some haven't but really should.They're really nice! I'm sure you'd like them."
+    roomie "Dominic is my oldest friend. He's a bit of a meanie but he's got the whole badboy look going on AND he is a serious hottie"
+    roomie "Victoria is..." #FIXME
+    roomie "August I didn't meet until freshman year, but they've been super helpful whenever I'm feeling down. They have the softest heart."
+    roomie "And then there's..." #FIXME
+=======
     roomie "My friends! I'd love for you to meet them soon. Some of them have been looking for someone,"
     roomie "some haven't but really should.They're really nice! I'm sure you'd like them."
     roomie "Dominic is my oldest friend. He's a bit of a meanie but he's got the whole badboy look going on"
@@ -181,18 +191,28 @@ label start:
     roomie "August I didn't meet until freshman year, but they've been super helpful whenever I'm feeling down."
     roomie "They have the softest heart."
     roomie "And then there's is Finley they have a tough exterior but they are really sweet once you get to know them." #FIXME
+>>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
     roomie "But! You'll meet them all eventually, I'm sure"
     roomie "Look at me prattling on, I should let you get some rest before tomorrow! First day!"
 
     hide roommate happy with dissolve
 
+<<<<<<< HEAD
+    player_thinking "First day... I'm a little nervous. I wonder what tomorrow will be like."
+
+=======
+>>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
     #####################################################################
     #
-    #  SECOND SCENE ????
+    #  SECOND SCENE -- Choose Club
+    #  > Choose Club
+    #  > If Graphic Design -- Meet Artist
+    #  > If Debate Team -- Meet Prep
+    #  > If No Club -- Meet Tsundere
     #
     #####################################################################
 
-    #FIXME Change visual to the school
+    scene outside campus 1 with fade
     "After classes"
     player_thinking "First day of school tends to be exciting, but generally uneventful."
     player_thinking "It's been a long day, but there's one last thing I should do before I leave..."
@@ -212,8 +232,59 @@ label choose_club:
             $ club = "no club"
             jump meet_tsun
 
+# Meet Artist: Andrea
 label meet_artist:
-    "MEET THE ARTIST"
+    scene design club with dissolve
+    player_thinking "There's only one spot left..."
+    show artist with moveinleft
+    $ knowAugust = "true"
+    $ assholeToAugust = "false"
+    player_thinking "The person sitting next to me is looking at me. Why are they blushing?"
+    menu:
+        "Introduce yourself":
+            player "Hi, I'm [player_name]. I'm new here."
+            "The person sitting next to you is smiling at their screen."
+            august "I'm August."
+            player "August? I like your name!"
+            august "Really? I like yours too..."
+            player_thinking "Am I blushing now?"
+            "You start up your laptop and open your most recent design project"
+            august "Oh wow, you're really talented!"
+            player "Ah, you think so? Thank you!"
+        "...":
+            pass
+
+    "The club president calls everyone's attention and introduces you to all the club members. They are very welcoming."
+    "The person sitting next to you, August, keeps glancing at you. "
+
+    menu:
+        "Ask August about what they are working on":
+            player "What have you been working on?"
+            august "Do you want to see?"
+            player "Absolutely!"
+            "August shows you a sketch of a creepy but beautiful mermaid."
+            menu:
+                "Oh wow, that's stunning!": 
+                    august "Thank you!"
+                    $ artistPoints += 1
+                "...Ew, that's weird.":
+                    august "Oh. Sorry."
+                    $ assholeToAugust = "true"        
+        "Tell August they're being creepy":
+            player "What are you looking at me for?"
+            august "Oh! I uh..."
+            player "You what? huh? need anything?"
+            august "No, no! I'm sorry, I didn't mean to bother you."
+            player "Yeah, I don't care, just stop being creepy."
+            $ assholeToAugust = "true"
+        "..."
+    
+    "You spend the rest of the hour desigining in August's company."
+    if assholeToAugust == "true":
+        "They looked really uncomfortable the entire time."
+    else:
+        "It was nice."
+
     jump skip_class
 
 label meet_tsun:
@@ -348,12 +419,31 @@ label meet_prep:
 
     jump skip_class
 
+    #####################################################################
+    #
+    #  THIRD SCENE -- Free time
+    #  > If skip class == meet bad boy
+    #  > Free time 
+    #    > If library == see prep
+    #    > If school store == see artist
+    #    > If tennis court == see bad boy
+    #    > If dorm == see tsundere
+    #
+    #####################################################################
+
 label skip_class:
+<<<<<<< HEAD
+
+    scene outside campus 2 with fade
+    "The next day..."
+    player_thinking "I'm not really feeling it today. Do I skip class?"
+=======
     play music "music/easy-lemon.mp3" loop
     scene dorm room with fade
     "BRRRING BRRRING..."
     player_thinking "Ah... another day of university..."
     player_thinking "Hrrg... I'm not really feeling it today. Do I skip class?"
+>>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
 
     menu:
         "Skip class":
@@ -422,6 +512,7 @@ label meet_badboy:
 
     jump free_time_1
 
+# Free time choice, MAP UI interaction 
 label free_time_1:
     
     player_thinking "I have some free time... what should I do?"
@@ -525,10 +616,89 @@ label library_1:
 
     jump halloween_party
 
+# See Artist in school store (Andrea)
 label schoolstore_1:
-    scene school store
-    "SCHOOL STORE 1: ARTIST IS THERE"
+    scene school store with dissolve
+    "You decided you need to buy some supplies at the school store."
+    
+    if knowAugust == "true":    
+        "Walking around, you see a familiar figure."
+        player "August?"
+        show artist with dissolve
+        if assholeToAugust == "true":
+            august "[player_name]."
+            hide artist with moveoutright
+            menu:
+                "Apologize":
+                    player "August, wait!"
+                    show artist with dissolve
+                    august "Yes?"
+                    player "I wanted to apologize about what I said during graphic design club. It was mean and you didn't deserve it."
+                    august "Oh?"
+                    player "I don't know why I said those cruel things, I promise I'm not usually like that."
+                    august "Okay. It's okay... We all have bad days."
+                    player "Yeah, but it's still no excuse."
+                    $ assholeToAugust = "false"
+                "...":
+                    "You get your supplies and leave."
+                    jump halloween_party
+        else:
+            august "[player_name]! It's lovely to see you again."
+            player "It's lovely to see you too! What are you up to?"
+            august "Oh! I was just buying some supplies for our next meeting, but then I got distracted by the snacks."
+            player_thinking "They're funny in a kind of awkward way..."
+            august "I was planning on getting some chocolates for Jane, she really likes them! I'll probably drop by your dorm at some point to give these to her."
+            august "If that's okay with you, of course."
+            player "Absolutely!"
+    else:
+        "You run into someone by the art supply section."
+        show artist with dissolve
+        "They seem to recognize you"
+        august "Hey, you're Jane's new roommate, aren't you?"
+        player "I am!" 
+        august "My name is August! What's your name?"
+        player "I'm [player_name]."
+        august "It's really nice to meet you!"
+        $ knowAugust = "true"
+
+    # If you just met them, if you were nice to them, and if you apologized.
+    player "Are you and Jane close?"
+    august "We are! At least, I think we are. We've only been close for a little bit, but I consider her one of my best friends!"
+    player_thinking "They look embarassed..."
+    menu:
+        "Well, I should get going":
+            player "It'll be a long day tomorrow, and I should really go work on my homework."
+            august "I completely understand, it was nice seeing you!"
+            player "It was nice seeing you too!"
+            jump halloween_party
+        "I can tell you're a good friend":
+            pass
+    august "I! Well, I try to be! She's a wonderful friend to me, too."
+    player "She told me you take really good care of her."
+    august "Well... I haven't had that many friends in my life. I just want to make sure the friends I have are happy."
+    player "You haven't had many friends?"
+    august "No, I'm not sure why... People make me really nervous sometimes."
+    player "You don't seem nervous right now."
+    august "...I'm not. I'm really comfortable around you, I don't know why."
+    menu:
+        "I'm glad you feel that way. I feel that way about you, too":
+            august "I guess that means we have to be friends!"
+            player "Yeah, I guess so!"
+            $ artistPoints += 1
+        "I just try to be nice and honest.": 
+            august "I wish more people were like you then."
+            $ artistPoints += 1
+        "You just met me.": 
+            august "...Yeah. You're right."
+
+    "August's phone starts ringing."
+    august "It's my mom. I should take this. It was nice seeing you, though, [player_name]."
+    player "It was nice seeing you too."
+
+    hide artist with fade
+
     jump halloween_party
+
 
 label tenniscourts_1:
     scene tennis courts
@@ -620,6 +790,14 @@ label dorms_1:
     hide finley
 
     jump halloween_party
+
+    #####################################################################
+    #
+    #  FOURTH SCENE: Halloween Party 
+    #  > If Haunted House -- see bad boy & tsundere
+    #  > If Pumpkin Patch -- see prep & artist
+    #
+    #####################################################################
 
 label halloween_party:
     scene autumn trees with fade
@@ -739,6 +917,16 @@ label pumpkin_patch:
         "Side with artist":
             pass
     jump free_time_2
+
+    #####################################################################
+    #
+    #  FIFTH SCENE -- Free Time pt. 2 
+    #    > If library == see tsundere
+    #    > If school store == see bad boy
+    #    > If tennis court == see prep
+    #    > If dorm == see tsundere
+    #
+    #####################################################################
 
 label free_time_2:
     scene dorm room with fade
