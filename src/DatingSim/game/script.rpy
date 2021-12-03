@@ -15,12 +15,9 @@ define victoria = Character("Victoria")
 define august = Character("August")
 define finley = Character("Finley")
 
-<<<<<<< HEAD
 # Have you met a romanceable character?
 default knowAugust = "false"
 
-=======
->>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
 # Pronoun data setup
 default subj_pron = ""
 default obj_pron = ""
@@ -176,13 +173,6 @@ label start:
     player "Don't know what?"
     roomie "Who you'd be cuter with!"
     player "What do you mean?"
-<<<<<<< HEAD
-    roomie "My friends! I'd love for you to meet them soon. Some of them have been looking for someone, some haven't but really should.They're really nice! I'm sure you'd like them."
-    roomie "Dominic is my oldest friend. He's a bit of a meanie but he's got the whole badboy look going on AND he is a serious hottie"
-    roomie "Victoria is..." #FIXME
-    roomie "August I didn't meet until freshman year, but they've been super helpful whenever I'm feeling down. They have the softest heart."
-    roomie "And then there's..." #FIXME
-=======
     roomie "My friends! I'd love for you to meet them soon. Some of them have been looking for someone,"
     roomie "some haven't but really should.They're really nice! I'm sure you'd like them."
     roomie "Dominic is my oldest friend. He's a bit of a meanie but he's got the whole badboy look going on"
@@ -191,17 +181,13 @@ label start:
     roomie "August I didn't meet until freshman year, but they've been super helpful whenever I'm feeling down."
     roomie "They have the softest heart."
     roomie "And then there's is Finley they have a tough exterior but they are really sweet once you get to know them." #FIXME
->>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
     roomie "But! You'll meet them all eventually, I'm sure"
     roomie "Look at me prattling on, I should let you get some rest before tomorrow! First day!"
 
     hide roommate happy with dissolve
 
-<<<<<<< HEAD
     player_thinking "First day... I'm a little nervous. I wonder what tomorrow will be like."
 
-=======
->>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
     #####################################################################
     #
     #  SECOND SCENE -- Choose Club
@@ -432,18 +418,11 @@ label meet_prep:
     #####################################################################
 
 label skip_class:
-<<<<<<< HEAD
-
-    scene outside campus 2 with fade
-    "The next day..."
-    player_thinking "I'm not really feeling it today. Do I skip class?"
-=======
     play music "music/easy-lemon.mp3" loop
     scene dorm room with fade
     "BRRRING BRRRING..."
     player_thinking "Ah... another day of university..."
     player_thinking "Hrrg... I'm not really feeling it today. Do I skip class?"
->>>>>>> ca92d3217f76a80dae2c37b71baf4490dced9713
 
     menu:
         "Skip class":
