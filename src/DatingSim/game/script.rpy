@@ -1490,15 +1490,13 @@ label TSUNDERE_START:
 
 label FINAL_PARTY:
     # new year's party event
+
+    # I'm at the New Year's Party... who should I ask to dance with? (or something)
+    # - pick one of the four characters
+    # - need at least 6 points with the chosen character to get their "good ending" (a picture of the character with them)
+    # OTHERWISE bad ending picture / MC dances alone :(
     return
 
 label BAD_END:
     # general bad ending
     return
-
-# TODO: good endings for whichever route
-# check flag variable for route
-
-label dominic_ending:
-    pass
-    # TODO graphic
