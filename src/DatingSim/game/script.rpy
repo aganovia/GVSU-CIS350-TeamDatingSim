@@ -275,6 +275,7 @@ label meet_artist:
 
 label meet_tsun:
     #meet TSUN
+    play music "music/easy-lemon.mp3" loop fadein 1.0
     scene school store   #is this the right scene for the store
 
     player_thinking "None of the clubs sound right for me. I guess I should just go get some food."
@@ -309,6 +310,8 @@ label meet_tsun:
     finley "Well I should get going see you later not that I excited to run into you again."
 
     hide finley
+
+    stop music
 
     jump skip_class
 
@@ -746,8 +749,12 @@ label tenniscourts_1:
 
 label dorms_1:
     scene dorm room
+
+    play music "music/easy-lemon.mp3" loop fadein 1.0
+
     #"DORMS 1: TSUN IS THERE"
     show finley
+
     player_thinking "I want to go hangout in my dorm."
 
     player_thinking "Is that Finley hanging out with Jane?"
@@ -767,6 +774,8 @@ label dorms_1:
             player_thinking "Is that a frown on their face?"
 
     hide finley
+
+    stop music
 
     jump halloween_party
 
@@ -928,6 +937,7 @@ label free_time_2:
 label library_2:
     #"LIBRARY 2: TSUN IS THERE"
 
+    play music "music/easy-lemon.mp3" loop fadein 1.0
 
     scene campus library  #is this the scene call for the library
 
@@ -951,6 +961,8 @@ label library_2:
             player_thinking "Well I should get back to looking for some books."
 
     hide finley
+
+    stop music
 
     jump route_determination
 
@@ -1402,18 +1414,19 @@ label dominic_event_3:
 label PREP_START:
     # prep route
     "PREP ROUTE START"
-    return
+    jump FINAL_PARTY
 
 label ARTIST_START:
     # artist route
     "ARTIST ROUTE START"
-    return
+    jump FINAL_PARTY
 
 label TSUNDERE_START:
     # tsundere route
     #"TSUNDERE ROUTE START"
 
     #first event
+    play music "music/white.mp3" loop fadein 1.0
     scene outside campus 2  #is this the scene for campus
 
     show finley
@@ -1427,7 +1440,7 @@ label TSUNDERE_START:
             $ tsunPoints += 1
             finley "Cool let's head over there now."
 
-            scene thrift shop #this should be another store
+            scene thrift_shop #this should be another store fixed this
 
             show finley
 
@@ -1541,7 +1554,9 @@ label TSUNDERE_START:
 
     player_thinking "Its time for the New Year's Dance."
 
-    return
+    stop music
+
+    jump FINAL_PARTY
 
 label FINAL_PARTY:
     # new year's party event
@@ -1550,8 +1565,86 @@ label FINAL_PARTY:
     # - pick one of the four characters
     # - need at least 6 points with the chosen character to get their "good ending" (a picture of the character with them)
     # OTHERWISE bad ending picture / MC dances alone :(
+
+    scene outside campus 2
+
+    player_thinking "I'm at the New Year's party. Everything looks so nice."
+
+    player_thinking "Everyone looks so good I wonder who I should to ask to dance?"
+
+    menu:
+        "Dominic":
+            if(badboyPoints >= 6):
+                if(portrait_number == 1):
+                    show dominic portrait 1
+                    player_thinking "The End"
+                elif(portrait_number == 2):
+                    show dominic portrait 2
+                    player_thinking "The End"
+                elif(portrait_number == 3):
+                    show dominic portrait 3
+                    player_thinking "The End"
+                elif(portrait_number == 4):
+                    show dominic portrait 4
+                    player_thinking "The End"
+            else:
+                jump BAD_END
+
+        "Victoria":
+            if(prepPoints >= 6):
+                if(portrait_number == 1):
+                    show victoria portrait 1
+                    player_thinking "The End"
+                elif(portrait_number == 2):
+                    show victoria portrait 2
+                    player_thinking "The End"
+                elif(portrait_number == 3):
+                    show victoria portrait 3
+                    player_thinking "The End"
+                elif(portrait_number == 4):
+                    show victoria portrait 4
+                    player_thinking "The End"
+            else:
+                jump BAD_END
+
+        "August":
+            if(artistPoints >= 6):
+                if(portrait_number == 1):
+                    show august portrait 1
+                    player_thinking "The End"
+                elif(portrait_number == 2):
+                    show august portrait 2
+                    player_thinking "The End"
+                elif(portrait_number == 3):
+                    show august portrait 3
+                    player_thinking "The End"
+                elif(portrait_number == 4):
+                    show august portrait 4
+                    player_thinking "The End"
+            else:
+                jump BAD_END
+
+        "Finley":
+            if(tsunPoints >= 6):
+                if(portrait_number == 1):
+                    show finley portrait 1
+                    player_thinking "The End"
+                elif(portrait_number == 2):
+                    show finley portrait 2
+                    player_thinking "The End"
+                elif(portrait_number == 3):
+                    show finley portrait 3
+                    player_thinking "The End"
+                elif(portrait_number == 4):
+                    show finley portrait 4
+                    player_thinking "The End"
+            else:
+                jump BAD_END
     return
 
 label BAD_END:
     # general bad ending
+    player_thinking "I guess dancing on my own"
+    scene bad ending #don't know if we will have a picture for this
+    player_thinking "The End"
     return
