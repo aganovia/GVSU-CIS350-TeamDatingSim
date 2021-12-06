@@ -65,7 +65,7 @@ organized by feature.
    This section lists all of our artifacts from our project. These artifacts have helped with the creation of our project.
 
    * [Burn-down chart](BurnDownChart10.22.2021.pdf)
-   * [Storyboard](Storyboard.png)
-   * [Character Customization Use-Case Diagram](CharacterCustomization.drawio.png)
-   * [Progress Tracking Use-Case Diagram](ProgressTracking.drawio.png)
-   * [Story Interaction Use-Case Diagram](StoryInteraction.drawio.png)
+   * [Storyboard](artifacts/Storyboard.png)
+   * [Character Customization Use-Case Diagram](artifacts/use_case_diagrams/CharacterCustomization.drawio.png)
+   * [Progress Tracking Use-Case Diagram](artifacts/use_case_diagramsProgressTracking.drawio.png)
+   * [Story Interaction Use-Case Diagram](artifacts/use_case_diagramsStoryInteraction.drawio.png)
