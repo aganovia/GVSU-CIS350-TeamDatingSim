@@ -1157,10 +1157,65 @@ label BADBOY_START:
 
 label dominic_event_1:
     scene outside campus snow
-    # play music 
+    show badboy
+    player_thinking "So... loitering, I guess."
+    player "Is this your idea of fun?"
+    dom "It isn't yours?"
+    player_thinking "Does he really not do anything else? Does he just like to idle with other people?"
+    player_thinking "Is it just with me...?"
+    player "Don't you have any other hobbies?"
+    dom "Like what?"
+    player "I don't know. Sports, art, music... anything like that?"
+    player_thinking "He takes a second to think."
+    dom "I like tagging buildings. And riding my motorcycle."
+    player_thinking "How stereotypical. Is he joking?"
+    player "You ride a motorcycle? How come I've never seen it?"
+    dom "Not around campus. I keep it in a safe spot."
+    dom "Maybe one of these days I'll let you witness it."
+    player "Er, anything else?"
+    dom "Arson is pretty fun."
+    player_thinking "Arson?!"
+    player_thinking "Silence."
+    player "Is that it?"
+    dom "Tax evasion."
+    player "Is that a hobby?"
+    dom "Nah, I'm just messing with you on that one. But all the others are true."
+    player "You actually commit arson?!"
+    dom "Once in a while, yeah. What about you? What do you do for fun?"
+    player_thinking "How can he just breeze past that?"
+    player_thinking "Well, what do I do for fun?"
+
+    menu:
+        "Tag buildings":
+            player "I like to tag buildings too, actually. Do it all the time."
+            player_thinking "Dominic raises an eyebrow."
+            dom "Yeah?"
+            player "Yeah."
+            player_thinking "I'm a terrible liar."
+            dom "Impressive. I would have never thought."
+            player_thinking "He's just playing along..."
+        "Write poetry":
+            $ badboyPoints += 1
+            player "I write poetry sometimes."
+            player "It's less work than writing full novels. It can be kinda cathartic, too."
+            dom "Really? That's kinda cool. That's not a common answer."
+            dom "Can I read it sometime?"
+            player_thinking "This guy wants to read poetry?"
+            player "Sure. It's nothing special, though..."
+            dom "I'm sure it's great."
+        "Sleep":
+            player "Um... sleeping is pretty fun. I do that a lot."
+            dom "Ah. You like to live dangerously."
+            dom "In the vulnerability of unconsciousness..."
+            player_thinking "What is he talking about?"
+
+    player_thinking "We spent the day having somewhat weird conversations before he abruptly made a run for the parking lot with a quick goodbye."
+    hide badboy
+    player_thinking "Even if it was kinda weird, I had a fun time hanging out with Dominic. I even learned some things about him."
+
+    jump dominic_event_2
 
 label dominic_event_2:
-
     scene outside dorms snow with fade
     play music "music/past-sadness.mp3" loop fadein 1.0
 
