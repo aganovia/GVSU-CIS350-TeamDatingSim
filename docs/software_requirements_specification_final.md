@@ -65,7 +65,7 @@ organized by feature.
    This section lists all of our artifacts from our project. These artifacts have helped with the creation of our project.
 
    * [Burn-down chart](BurnDownChart10.22.2021.pdf)
-   * [Storyboard](artifacts/Storyboard.png)
-   * [Character Customization Use-Case Diagram](artifacts/use_case_diagrams/CharacterCustomization.drawio.png)
-   * [Progress Tracking Use-Case Diagram](artifacts/use_case_diagramsProgressTracking.drawio.png)
-   * [Story Interaction Use-Case Diagram](artifacts/use_case_diagramsStoryInteraction.drawio.png)
+   * [Storyboard](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/Storyboard.png)
+   * [Character Customization Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/CharacterCustomization.drawio.png)
+   * [Progress Tracking Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/ProgressTracking.drawio.png)
+   * [Story Interaction Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/StoryInteraction.drawio.png)
