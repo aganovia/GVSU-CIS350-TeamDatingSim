@@ -221,6 +221,7 @@ label choose_club:
 # Meet Artist: Andrea
 label meet_artist:
     scene design club with dissolve
+    play music "music/windswept.mp3" loop fadein 1.0
     player_thinking "There's only one spot left..."
     show artist with moveinleft
     $ knowAugust = "true"
@@ -229,6 +230,7 @@ label meet_artist:
     menu:
         "Introduce yourself":
             player "Hi, I'm [player_name]. I'm new here."
+            play sound "audio/artist_laugh.mp3"
             "The person sitting next to you is smiling at their screen."
             august "I'm August."
             player "August? I like your name!"
@@ -250,7 +252,8 @@ label meet_artist:
             player "Absolutely!"
             "August shows you a sketch of a creepy but beautiful mermaid."
             menu:
-                "Oh wow, that's stunning!": 
+                "Oh wow, that's stunning!":
+                    play sound "audio/artist_laugh.mp3" 
                     august "Thank you!"
                     $ artistPoints += 1
                 "...Ew, that's weird.":
@@ -271,6 +274,7 @@ label meet_artist:
     else:
         "It was nice."
 
+    stop music fadeout 1.0
     jump skip_class
 
 label meet_tsun:
@@ -598,6 +602,7 @@ label library_1:
 # See Artist in school store (Andrea)
 label schoolstore_1:
     scene school store with dissolve
+    play music "music/windswept.mp3" loop fadein 1.0
     "You decided you need to buy some supplies at the school store."
     
     if knowAugust == "true":    
@@ -617,6 +622,7 @@ label schoolstore_1:
                     player "I don't know why I said those cruel things, I promise I'm not usually like that."
                     august "Okay. It's okay... We all have bad days."
                     player "Yeah, but it's still no excuse."
+                    play sound "audio/artist_laugh.mp3"
                     $ assholeToAugust = "false"
                 "...":
                     "You get your supplies and leave."
@@ -629,6 +635,7 @@ label schoolstore_1:
             august "I was planning on getting some chocolates for Jane, she really likes them! I'll probably drop by your dorm at some point to give these to her."
             august "If that's okay with you, of course."
             player "Absolutely!"
+
     else:
         "You run into someone by the art supply section."
         show artist with dissolve
@@ -652,6 +659,7 @@ label schoolstore_1:
             jump halloween_party
         "I can tell you're a good friend":
             pass
+    play sound "audio/artist_laugh.mp3"
     august "I! Well, I try to be! She's a wonderful friend to me, too."
     player "She told me you take really good care of her."
     august "Well... I haven't had that many friends in my life. I just want to make sure the friends I have are happy."
@@ -661,10 +669,12 @@ label schoolstore_1:
     august "...I'm not. I'm really comfortable around you, I don't know why."
     menu:
         "I'm glad you feel that way. I feel that way about you, too":
+            play sound "audio/artist_laugh.mp3"
             august "I guess that means we have to be friends!"
             player "Yeah, I guess so!"
             $ artistPoints += 1
         "I just try to be nice and honest.": 
+            play sound "audio/artist_laugh.mp3"
             august "I wish more people were like you then."
             $ artistPoints += 1
         "You just met me.": 
@@ -675,6 +685,7 @@ label schoolstore_1:
     player "It was nice seeing you too."
 
     hide artist with fade
+    stop music fadeout 1.0
 
     jump halloween_party
 
