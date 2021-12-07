@@ -35,6 +35,9 @@ default haunted_house = "none"
 default slept_in = "false"
 default answered_door = "false"
 
+image heart = Image("images/heart.png", xalign=0.5, yalign=0.5)
+
+
 label start:
     $ portrait_number = 0
     $ badboyPoints = 0
@@ -62,6 +65,10 @@ label start:
     roomie "Oh my goodness you're here! You're here!"
     show roommate happy with moveinleft
     roomie "You're my new roommate, right?"
+
+    #FIXME heart for test and showing off! 
+    show heart with zoomin 
+    hide heart with dissolve 
 
     # ALEXIS: Name input
     python:
@@ -255,6 +262,8 @@ label meet_artist:
                 "Oh wow, that's stunning!":
                     play sound "audio/artist_laugh.mp3" 
                     august "Thank you!"
+                    show heart with zoomin 
+                    hide heart with dissolve 
                     $ artistPoints += 1
                 "...Ew, that's weird.":
                     august "Oh. Sorry."
@@ -672,10 +681,14 @@ label schoolstore_1:
             play sound "audio/artist_laugh.mp3"
             august "I guess that means we have to be friends!"
             player "Yeah, I guess so!"
+            show heart with zoomin 
+            hide heart with dissolve 
             $ artistPoints += 1
         "I just try to be nice and honest.": 
             play sound "audio/artist_laugh.mp3"
             august "I wish more people were like you then."
+            show heart with zoomin 
+            hide heart with dissolve 
             $ artistPoints += 1
         "You just met me.": 
             august "...Yeah. You're right."
