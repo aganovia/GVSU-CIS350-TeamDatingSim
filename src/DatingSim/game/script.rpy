@@ -308,6 +308,9 @@ label meet_tsun:
     menu:
         "I like your shirt.":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             finley "Thanks for the compliment, not that I needed one. Oh you must be Jane’s roommate. Name’s Finley."
             player_thinking "Are they blushing, and is that a soft smile on their face."
 
@@ -794,6 +797,9 @@ label dorms_1:
     menu:
         "Sure sounds like fun!":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             finley "Awesome I was think about something with spiders since Dominic is afraid of them."
             player "What about a plastic spider that drops down when he opens the door."
             finley "That is perfect! I need to go buy a plastic spider now see you later [player_name]!"
@@ -898,6 +904,9 @@ label haunted_house:
             player_thinking "I think this was a Halloween well spent."
         "Side with Finley":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             $ haunted_house = "false"
             player "No, you have a point, Finley. Why risk it?"
             player_thinking "Are they blushing? Dominic looks tired."
@@ -1046,6 +1055,9 @@ label library_2:
     menu:
         "Do you want some help?":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             finley "Really thanks for the help not that I couldn’t mange on my own."
             player_thinking "Finley is blushing so much."
             player_thinking "Finley and I spent the next 3 hours studying for their test."
@@ -1749,6 +1761,9 @@ label TSUNDERE_START:
     menu:
         "Sure I would love to go thrift shopping!":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             finley "Cool let's head over there now."
 
             scene thrift_shop #this should be another store fixed this
@@ -1808,6 +1823,9 @@ label TSUNDERE_START:
     menu:
         "Choose the bad movie":
             $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             finley "That movie is bad it's amazing good choice!"
             player_thinking "Finley face lit up like a christmas tree when I chose this movie and is that a blush on their cheeks. Finley picks up the movie to put it in the DVD player."
         "Choose the good movie":
@@ -1833,6 +1851,11 @@ label TSUNDERE_START:
             player_thinking "Finley seems really sad that I said no."
 
         "Sure cooking with you sounds like a lot of fun!":
+            $ tsunPoints += 1
+            play sound "audio/tsundere.mp3"
+            show heart with zoomin
+            hide heart with dissolve
+
             finley "Well see you tonight!"
 
             player_thinking "Did Finley ask me to hangout without hiding their feelings, or their blush?"
@@ -1862,8 +1885,6 @@ label TSUNDERE_START:
     hide finley
 
     scene dorm room
-
-    player_thinking "Its time for the New Year's Dance."
 
     stop music
 
