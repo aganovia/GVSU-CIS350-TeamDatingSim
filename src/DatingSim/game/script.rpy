@@ -15,6 +15,9 @@ define victoria = Character("Victoria")
 define august = Character("August")
 define finley = Character("Finley")
 
+# define characters in debate
+define debateStudent = Character("Student")
+
 # Have you met a romanceable character?
 default knowAugust = "false"
 
@@ -30,10 +33,14 @@ default club = "no club"
 default meetPrep = "false"
 default skipped_class = "false"
 default haunted_house = "none"
+default messedUpDebate = "false"
 
 # Flags for Dom route
 default slept_in = "false"
 default answered_door = "false"
+
+image heart = Image("images/heart.png", xalign=0.5, yalign=0.5)
+
 
 label start:
     $ portrait_number = 0
@@ -62,6 +69,10 @@ label start:
     roomie "Oh my goodness you're here! You're here!"
     show roommate happy with moveinleft
     roomie "You're my new roommate, right?"
+
+    #FIXME heart for test and showing off! 
+    show heart with zoomin 
+    hide heart with dissolve 
 
     # ALEXIS: Name input
     python:
@@ -146,7 +157,7 @@ label start:
             "Go out to a raging party":
                 $ badboyPoints += 1
                 $ tsunPoints += 1
-            
+
     roomie "Would you rather have"
     menu:
         "A close group of friends":
@@ -202,6 +213,8 @@ label start:
     "After classes"
     player_thinking "First day of school tends to be exciting, but generally uneventful."
     player_thinking "It's been a long day, but there's one last thing I should do before I leave..."
+
+
     jump choose_club
 
 label choose_club:
@@ -221,6 +234,7 @@ label choose_club:
 # Meet Artist: Andrea
 label meet_artist:
     scene design club with dissolve
+    play music "music/windswept.mp3" loop fadein 1.0
     player_thinking "There's only one spot left..."
     show artist with moveinleft
     $ knowAugust = "true"
@@ -229,6 +243,7 @@ label meet_artist:
     menu:
         "Introduce yourself":
             player "Hi, I'm [player_name]. I'm new here."
+            play sound "audio/artist_laugh.mp3"
             "The person sitting next to you is smiling at their screen."
             august "I'm August."
             player "August? I like your name!"
@@ -250,12 +265,15 @@ label meet_artist:
             player "Absolutely!"
             "August shows you a sketch of a creepy but beautiful mermaid."
             menu:
-                "Oh wow, that's stunning!": 
+                "Oh wow, that's stunning!":
+                    play sound "audio/artist_laugh.mp3" 
                     august "Thank you!"
+                    show heart with zoomin 
+                    hide heart with dissolve 
                     $ artistPoints += 1
                 "...Ew, that's weird.":
                     august "Oh. Sorry."
-                    $ assholeToAugust = "true"        
+                    $ assholeToAugust = "true"
         "Tell August they're being creepy":
             player "What are you looking at me for?"
             august "Oh! I uh..."
@@ -264,13 +282,14 @@ label meet_artist:
             player "Yeah, I don't care, just stop being creepy."
             $ assholeToAugust = "true"
         "..."
-    
+
     "You spend the rest of the hour desigining in August's company."
     if assholeToAugust == "true":
         "They looked really uncomfortable the entire time."
     else:
         "It was nice."
 
+    stop music fadeout 1.0
     jump skip_class
 
 label meet_tsun:
@@ -412,7 +431,7 @@ label meet_prep:
     #
     #  THIRD SCENE -- Free time
     #  > If skip class == meet bad boy
-    #  > Free time 
+    #  > Free time
     #    > If library == see prep
     #    > If school store == see artist
     #    > If tennis court == see bad boy
@@ -494,9 +513,9 @@ label meet_badboy:
 
     jump free_time_1
 
-# Free time choice, MAP UI interaction 
+# Free time choice, MAP UI interaction
 label free_time_1:
-    
+
     player_thinking "I have some free time... what should I do?"
 
     call screen MapUI(1)
@@ -598,12 +617,13 @@ label library_1:
 
     jump halloween_party
 
-# See Artist in school store (Andrea)
+################ See Artist in school store (Andrea) ################
 label schoolstore_1:
     scene school store with dissolve
+    play music "music/windswept.mp3" loop fadein 1.0
     "You decided you need to buy some supplies at the school store."
-    
-    if knowAugust == "true":    
+
+    if knowAugust == "true":
         "Walking around, you see a familiar figure."
         player "August?"
         show artist with dissolve
@@ -620,6 +640,7 @@ label schoolstore_1:
                     player "I don't know why I said those cruel things, I promise I'm not usually like that."
                     august "Okay. It's okay... We all have bad days."
                     player "Yeah, but it's still no excuse."
+                    play sound "audio/artist_laugh.mp3"
                     $ assholeToAugust = "false"
                 "...":
                     "You get your supplies and leave."
@@ -632,12 +653,13 @@ label schoolstore_1:
             august "I was planning on getting some chocolates for Jane, she really likes them! I'll probably drop by your dorm at some point to give these to her."
             august "If that's okay with you, of course."
             player "Absolutely!"
+
     else:
         "You run into someone by the art supply section."
         show artist with dissolve
         "They seem to recognize you"
         august "Hey, you're Jane's new roommate, aren't you?"
-        player "I am!" 
+        player "I am!"
         august "My name is August! What's your name?"
         player "I'm [player_name]."
         august "It's really nice to meet you!"
@@ -655,6 +677,7 @@ label schoolstore_1:
             jump halloween_party
         "I can tell you're a good friend":
             pass
+    play sound "audio/artist_laugh.mp3"
     august "I! Well, I try to be! She's a wonderful friend to me, too."
     player "She told me you take really good care of her."
     august "Well... I haven't had that many friends in my life. I just want to make sure the friends I have are happy."
@@ -664,23 +687,30 @@ label schoolstore_1:
     august "...I'm not. I'm really comfortable around you, I don't know why."
     menu:
         "I'm glad you feel that way. I feel that way about you, too":
+            play sound "audio/artist_laugh.mp3"
             august "I guess that means we have to be friends!"
             player "Yeah, I guess so!"
+            show heart with zoomin 
+            hide heart with dissolve 
             $ artistPoints += 1
         "I just try to be nice and honest.": 
+            play sound "audio/artist_laugh.mp3"
             august "I wish more people were like you then."
+            show heart with zoomin 
+            hide heart with dissolve 
             $ artistPoints += 1
-        "You just met me.": 
+        "You just met me.":
             august "...Yeah. You're right."
 
     "August's phone starts ringing."
     august "It's my mom. I should take this. It was nice seeing you, though, [player_name]."
     player "It was nice seeing you too."
 
-    hide artist with fade
+    hide artist with dissolve
+    stop music fadeout 1.0
 
     jump halloween_party
-
+################ End Artist Section, Jump to halloween_party ################
 
 label tenniscourts_1:
     scene tennis courts
@@ -781,9 +811,13 @@ label dorms_1:
 
     #####################################################################
     #
-    #  FOURTH SCENE: Halloween Party 
-    #  > If Haunted House -- see bad boy & tsundere
-    #  > If Pumpkin Patch -- see prep & artist
+    #  FOURTH SCENE: Halloween Party Events
+    #  > If Haunted House 
+    #       > Go with Bad boy +Point
+    #       > Go with Tsundere +Point
+    #  > If Pumpkin Patch
+    #       > Go with Artist +Point
+    #       > Go with Prep +Point
     #
     #####################################################################
 
@@ -897,18 +931,78 @@ label haunted_house:
     jump free_time_2
 
 label pumpkin_patch:
-    "Pumpkin patch event"
+    "After deciding to go to the pumpkin patch, you run into..."
+    show prep at left with dissolve
+    show artist at right with dissolve 
+    victoria "I told you already, I don't want you to draw me! I have hay everywhere!"
+    august "And yet you still look beautiful! I need some practice... please?"
+    victoria "No!"
 
+    #   Depending on who you've met... 
+    if knowAugust == "true":
+        if assholeToAugust == "true":
+            august "Oh... I should go."
+            hide artist with moveoutright
+            show prep at center with move
+            victoria "...I guess that settles that! Let's go to the corn maze!"
+            $ prepPoints += 1
+            jump corn_maze
+        # If you know August and Victoria
+        if meetPrep == "true":
+            "Victoria and August!"
+        # If you only know August
+        else:
+            "August! and someone you don't recognize."
+            august "Oh hey! It's [player_name]."
+    else:
+        # If you only know Victoira
+        if meetPrep == "true":
+            "Victoria! and someone you don't recognize."
+            victoria "Oh look, there’s [player_name]. Help me get out of this, please."
+        # If you know Neither
+        else:
+            "Two strangers are having a heated argument!"
+
+    august "Sorry, we were just trying to figure out what we wanted to do..."
+    victoria "I want to go to the corn maze!"
+    august "I just want to sit here sketch stuff out, it's so lovely out here."
+    player_thinking "What do I want to do?"
+    # Go with Artist or Prep choice and points
     menu:
-        "Side with prep":
-            pass
-        "Side with artist":
-            pass
+        "Go with Victoria to the Corn Maze":
+            player "I haven't gone to a corn maze in a really long time, that sounds really fun!"
+            victoria "YAY!"
+            august "Ah, I think I'll just hang back here and draw the pumpkins... I hope you two have fun though!"
+            hide artist with dissolve
+            show prep at center with move
+            victoria "Let's go, [player_name]!" 
+            show heart with zoomin 
+            hide heart with dissolve 
+            $ prepPoints += 1
+            jump corn_maze
+
+        "Keep August Company":
+            player "It's beautiful out here, you should definitely draw something August."
+            player "If Victoria wants to go to the corn maze, I can keep you company instead."
+            victoria "I have an idea... you should draw [player_name]! I'll go to the maze!"
+            august "Are you sure? Well, I hope you have fun!" 
+            hide prep with dissolve
+            show artist at center with move
+            august "...let's go find a spot to sit."
+            show heart with zoomin
+            hide heart with dissolve
+            $ artistPoints += 1
+            jump draw_pumpkins
+    
+label corn_maze:
+    jump free_time_2
+
+label draw_pumpkins: 
     jump free_time_2
 
     #####################################################################
     #
-    #  FIFTH SCENE -- Free Time pt. 2 
+    #  FIFTH SCENE -- Free Time pt. 2
     #    > If library == see tsundere
     #    > If school store == see bad boy
     #    > If tennis court == see prep
@@ -1037,10 +1131,10 @@ label schoolstore_2:
             player_thinking "Aaaand he's gone."
             player_thinking "I stick my hands in both of my pant pockets and felt something small and metallic."
             player_thinking "Confused beyond belief, with a shiny new keychain in my hand, I stood there, dumbfounded."
-    
+
     stop music
     player_thinking "I'll never understand that guy."
-    
+
     jump route_determination
 
 label tenniscourts_2:
@@ -1236,7 +1330,7 @@ label dominic_event_2:
     player_thinking "The cold air is refreshing."
     player_thinking "After a couple minutes of aimless vibing, I take a look around and see a familiar figure a few feet away."
     player_thinking "I walk over to him, leaving footprints in the snow behind me."
-    
+
     show badboy
 
     player "Hey, Dominic. What are you doing here?"
@@ -1263,7 +1357,7 @@ label dominic_event_2:
     player_thinking "Snowflakes begin to gently fall onto us."
     player_thinking "Is this the real Dominic? Has he been putting on an act this whole time?"
     player_thinking "I wonder what's gotten into him..."
-    
+
     if skipped_class == "true":
         dom "... you shouldn't skip class, [player_name]. Even if it's just one time, it's easy to keep doing it."
         player "Wow. You, telling me I should go to class? I'm shocked!"
@@ -1413,8 +1507,225 @@ label dominic_event_3:
 
 label PREP_START:
     # prep route
-    "PREP ROUTE START"
-    jump FINAL_PARTY
+    scene dorm room
+    player_thinking "Here I am in Victoria’s dorm room. I never thought she would invite me here."
+    player_thinking "In fact, we’ve actually become friends!"
+    player_thinking "She left the room for a minute to grab something… should I look around?"
+    menu:
+        "Snoop!":
+            player_thinking "I haven’t heard any footsteps, so I’m going to be a little nosy."
+            player_thinking "I get up and look at the top of her dresser."
+            player_thinking "It’s a regular dresser just like mine, but it’s cluttered with papers, books, and clothes."
+            player_thinking "I notice that one of the visible papers is a quiz."
+            player_thinking "It looks like there’s a lot of red ink on it. I pick it up to get a closer look."
+            player_thinking "Oof. Looks like she failed a quiz. I should put it back-"
+
+            show prep
+
+            victoria "What are you doing?"
+            player_thinking "She notices what’s in my hand, and snatches it away."
+            victoria "Give that back! What gives you the right to look through my stuff?!"
+            victoria "What did you do, look through my dresser too?"
+            player "I - I was just curious. I’m sorry. I swear I didn’t look at anything else!"
+            player_thinking "She sighs and sits on her bed."
+            victoria "Sorry, I guess I might have overreacted. Do you want to watch a movie now?"
+            player "S - sure."
+            player_thinking "My face is red, and I kind of want to escape because that was embarrassing."
+            player_thinking "But I sit on the bed next to her and we watch a movie together in silence."
+            player_thinking "When it concludes, she gives me a short hug goodbye and I trudge back to my dorm room."
+            hide prep
+            scene outside campus snow
+            player_thinking "That could have gone better."
+            jump victoria_event_2
+        "Wait for her to get back.":
+            $ prepPoints += 1
+            player_thinking "It’s probably not a good idea, Victoria likes her privacy. I’ll sit tight."
+            player_thinking "After a couple minutes, she walks back in with a DVD in hand."
+
+            show prep
+
+            victoria "Okay, here! This is my favorite movie."
+            player_thinking "She hands it to me and looks at me expectantly."
+            victoria "So, do you want to watch it?"
+            player "Sure! Pop it in. I’ve never seen this before."
+            player_thinking "She seems almost giddy with excitement. She takes the DVD back from me and inserts it into the DVD player."
+            player_thinking "She sits next to me on her bed, and the movie starts"
+            player_thinking "As the movie progresses, she scoots closer and closer to me, until we are right next to each other."
+            player_thinking "Then she grabs my arm and puts her head on my shoulder."
+            player_thinking "This is really nice."
+            hide prep
+            jump victoria_event_2
+
+
+label victoria_event_2:
+    # victoria's second event (debate)
+    scene debate room
+    player_thinking "It’s almost time for the debate! Victoria and I have been hanging out a couple times a week to practice for this."
+    player_thinking "Well, we didn’t practice every time, but sometimes. I hope it goes well."
+    show prep
+    player_thinking "I’m sitting in the debate room at the front, waiting for our opponents to finish preparing. Victoria and I are ready to go."
+    player_thinking "I notice Victoria’s foot tapping, and I reach for her hand to give a reassuring squeeze."
+    player "Hey, we’ve practiced a lot for this. We’ll do great!"
+    victoria "I know. Doesn’t make me less nervous. Are you nervous at all?"
+    player "I mean, yeah."
+    player "But just because I’m nervous doesn’t mean I’m not confident! You can be both."
+    player_thinking "An announcement booms over the speakers. It’s time to begin."
+    player_thinking "The topic is: Should extracurricular activities be given more funding?"
+    player_thinking "Our team is arguing for yes, and the other is arguing for no."
+    player_thinking "I watch Victoria and a member of the other team walk up to the designated microphones."
+    player_thinking "The other team starts. Each side gives their opening statements, and then the debate begins."
+
+    hide prep
+
+    debateStudent "College students are too busy for extracurricular activities. They should be focusing on their academics!"
+    show prep
+
+    victoria "Isn’t the point of college to also broaden your horizons and try new things? Extracurricular activities give students the opportunity to do that at little or no cost."
+    victoria "Plus, extracurricular activities can offer stress relief to students, so they do better academically."
+    hide prep
+
+    player_thinking "The argument goes back and forth for 5 minutes, and then they are stopped by the moderator. "
+    player_thinking "I think Victoria did a better job, but I may be biased."
+    player_thinking "Victoria sits back down next to me. I stand up and make my way to the podium."
+    player_thinking "We each give our opening statements, and my opponent goes first once more."
+
+    debateStudent "College students already have an issue with sleep and mental health."
+    debateStudent "Extracurriculars have enough funding as-is because students do not need to get any more involved."
+
+    menu:
+        "You're right about their mental health and sleep.":
+            $ prepPoints += 1
+            player "Yes, college students are notorious for terrible sleep schedules and bad mental health states, but that’s not a reason to withhold more funding for extracurriculars."
+            player "Like my teammate said, extracurricular activities are stress-relievers for many college students, and more funding might get them more involved, but this would only help their mental health!"
+            player_thinking "We continue debating for 5 minutes, and then we are stopped."
+            player_thinking "I have a seat next to Victoria once more, and we watch the rest of the debate."
+            player_thinking "Once it’s over, the moderator announces our team as the winner!"
+            player_thinking "We cheer and high five, and head outside to celebrate."
+            player_thinking "Victoria gives me a big hug and we make plans to go to the after party that one of our teammates planned."
+            jump victoria_event_3
+
+        "College students' mental health is just fine!":
+            $ messedUpDebate = "true"
+            player "College students are doing fine in the mental health department. They totally have the time and energy for more extracurriculars!"
+            player_thinking "I hear the audience chuckle."
+            debateStudent "That’s blatantly false; everyone knows that college students are struggling. Don’t make up facts to help your case."
+            player_thinking "The audience cheers at this response, and I want to go hide in the corner."
+            player_thinking "We finish our portion of the debate, and I sit down."
+            player_thinking "Victoria does not make eye contact with me."
+            player_thinking "We watch the rest of the team’s debates, and the moderator announces that our team won, despite my mishap."
+            scene dorm room
+            player_thinking "I’m too embarrassed to talk to everyone right now, so I walk back to my dorm without saying goodbye. Maybe I can make amends at the after party tonight."
+            jump victoria_event_3
+
+label victoria_event_3:
+    # victoria's third event (after party)
+    scene apartment
+    player_thinking "I'm standing by myself at the after party. One of our teammates is hosting it in their apartment."
+    if messedUpDebate == "true":
+        player_thinking "We won the debate,  no thanks to me. I hope Victoria can still look me in the eye after this."
+        player_thinking "I couldn’t even look myself in the eye when I was getting ready to come here."
+        player_thinking "I’ve been keeping an eye on the front door for about 10 minutes, and Victoria finally walks in."
+        player_thinking "She looks absolutely stunning, wearing a red romper with a black blazer on top."
+        player_thinking "I’ve never seen her this dressed-up before, but this look suits her well."
+        player_thinking "Her eyes meet mine and she approaches me."
+        show prep
+        player_thinking "She grabs my hand."
+        victoria "Come with me."
+        scene balcony
+        show prep
+        player_thinking "Before I can respond, she yanks my hand and we go out the back door, to the porch."
+        player_thinking "No one is out here."
+        player "Look, I’m sorry for messing up in the debate today. I was too embarrassed to face you, so that’s why I left without celebrating with you guys."
+        victoria "I’m not mad at you. I wasn’t happy with you at first."
+        victoria "I got plenty of secondhand embarrassment from you, sure, but I can’t act like I’ve never messed up at the podium before."
+        victoria "Plus, it was your first real debate! I think you did decent, considering that."
+        player "Th-thank you. Thank you for being so understanding."
+        player_thinking "Victoria being apologetic is a rare thing, I’ve noticed."
+        player_thinking "So, this is cool."
+        player_thinking "She takes my hands and pulls me in for a hug."
+        player_thinking "Or is it something else…?"
+        player_thinking "Should I go for a kiss?"
+        menu:
+            "Kiss her!":
+                player_thinking "I’m going in for a kiss!"
+                player_thinking "Our lips meet, and I realize that she was also going in for a kiss!"
+                player_thinking "It’s a nice, short kiss, and Victoria pulls away first."
+                victoria "Oh, I totally forgot! I have to introduce you to my friend from my public policy class! Follow me!"
+                hide prep
+                scene apartment
+                player_thinking "And so, for the rest of the party, I am dragged around by Victoria as she excitedly introduces me to her friends outside of the debate team."
+                player_thinking "The night ends, and we go our separate ways."
+                player_thinking "We haven’t made anything official, but I hope we will soon."
+                jump FINAL_PARTY
+            "Hug her!":
+                player_thinking "Let’s go for a hug."
+                player_thinking "I go to give her a regular old hug, and Victoria tries to kiss me."
+                player_thinking "I jump back a little bit."
+                victoria "Oh crap! I’m sorry, I didn’t mean to do that… I thought you might feel that way about me. I’m so sorry!"
+                player "It’s fine, don’t worry about it! I like you, I just didn’t know you wanted to kiss me!"
+                victoria "Oh, you’re just saying that to make me feel better. I’m serious, I’m so sorry! I’ll go inside now."
+                hide prep
+                scene apartment
+                player_thinking "She opens the door and hurries back inside, her face a bright red."
+                player_thinking "She spends the rest of the party avoiding me, probably too embarrassed to face me."
+                player_thinking "I do like her, I just wasn’t prepared for that yet."
+                player_thinking "I hope we can still work it out."
+                jump FINAL_PARTY
+
+    else:
+        player_thinking "We won the debate, thanks to Victoria and I."
+        player_thinking "I’ve been keeping an eye on the front door for about 10 minutes, and Victoria finally walks in."
+        player_thinking "She looks absolutely stunning, wearing a red romper with a black blazer on top."
+        player_thinking "I’ve never seen her this dressed-up before, but this look suits her well."
+        player_thinking "Her eyes meet mine and she approaches me."
+        show prep
+        player_thinking "She grabs my hand."
+        victoria "Come with me."
+        player_thinking "Before I can respond, she yanks my hand and we go out the back door, to the porch."
+        scene balcony
+        show prep
+        player_thinking "No one is out here."
+        player "What’s up?"
+        victoria "I just wanted to tell you that you did so well in the debate today!"
+        victoria "I didn’t know how well you were going to do, to be honest."
+        victoria "Especially since it was your first real debate."
+        victoria "But you did nearly as well as me! Good for you!"
+        player_thinking "I giggle."
+        player "Almost as well as you, huh? I guess I’ll take that as a compliment. Thanks."
+        victoria "You’re welcome."
+        player_thinking "We stand in silence for a minute or two and look at the stars. It’s chilly, but beautiful outside tonight."
+        player_thinking "I look over at Victoria and catch her staring at me."
+        player_thinking "She smiles and takes my hands. She then starts pulling me into a hug."
+        player_thinking "Or is it something else…?"
+        player_thinking "Should I go for a kiss?"
+        menu:
+            "Kiss her!":
+                player_thinking "I’m going in for a kiss!"
+                player_thinking "Our lips meet, and I realize that she was also going in for a kiss!"
+                player_thinking "It’s a nice, short kiss, and Victoria pulls away first."
+                victoria "Oh, I totally forgot! I have to introduce you to my friend from my public policy class! Follow me!"
+                hide prep
+                scene apartment
+                player_thinking "And so, for the rest of the party, I am dragged around by Victoria as she excitedly introduces me to her friends outside of the debate team."
+                player_thinking "The night ends, and we go our separate ways."
+                player_thinking "We haven’t made anything official, but I hope we will soon."
+                jump FINAL_PARTY
+            "Hug her!":
+                player_thinking "Let’s go for a hug."
+                player_thinking "I go to give her a regular old hug, and Victoria tries to kiss me."
+                player_thinking "I jump back a little bit."
+                victoria "Oh crap! I’m sorry, I didn’t mean to do that… I thought you might feel that way about me. I’m so sorry!"
+                player "It’s fine, don’t worry about it! I like you, I just didn’t know you wanted to kiss me!"
+                victoria "Oh, you’re just saying that to make me feel better. I’m serious, I’m so sorry! I’ll go inside now."
+                hide prep
+                scene apartment
+                player_thinking "She opens the door and hurries back inside, her face a bright red."
+                player_thinking "She spends the rest of the party avoiding me, probably too embarrassed to face me."
+                player_thinking "I do like her, I just wasn’t prepared for that yet."
+                player_thinking "I hope we can still work it out."
+                jump FINAL_PARTY
+
+
 
 label ARTIST_START:
     # artist route
@@ -1644,7 +1955,7 @@ label FINAL_PARTY:
 
 label BAD_END:
     # general bad ending
-    player_thinking "I guess dancing on my own"
+    player_thinking "I guess I'm dancing on my own..."
     scene bad ending #don't know if we will have a picture for this ending
     player_thinking "The End"
     return

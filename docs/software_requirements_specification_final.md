@@ -1,7 +1,10 @@
 # Overview
 This document details the software requirements specification for our project. Functional and non-functional requirements are organized by feature.
+Artifacts from the development of our project are also listed in this document.
 
 # Software Requirements
+This section consists of two sections: functional requirements and non-functional requirements. Within these sections, the requirements are
+organized by feature.
 
 # Functional Requirements
 
@@ -57,3 +60,12 @@ This document details the software requirements specification for our project. F
    4. Images, such as character sprites and backgrounds, shall be sized appropriately to fit the game window.
    5. Image buttons shall display a different image when hovered over with the mouse.
    6. Images in the Gallery menu shall be displayed in a grid.
+
+   # Software Artifacts
+   This section lists all of our artifacts from our project. These artifacts have helped with the creation of our project.
+
+   * [Burn-down chart](BurnDownChart10.22.2021.pdf)
+   * [Storyboard](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/Storyboard.png)
+   * [Character Customization Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/CharacterCustomization.drawio.png)
+   * [Progress Tracking Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/ProgressTracking.drawio.png)
+   * [Story Interaction Use-Case Diagram](https://github.com/aganovia/GVSU-CIS350-TeamDatingSim/blob/master/artifacts/use_case_diagrams/StoryInteraction.drawio.png)
