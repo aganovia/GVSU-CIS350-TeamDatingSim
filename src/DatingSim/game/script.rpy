@@ -1645,6 +1645,6 @@ label FINAL_PARTY:
 label BAD_END:
     # general bad ending
     player_thinking "I guess dancing on my own"
-    scene bad ending #don't know if we will have a picture for this
+    scene bad ending #don't know if we will have a picture for this ending
     player_thinking "The End"
     return
