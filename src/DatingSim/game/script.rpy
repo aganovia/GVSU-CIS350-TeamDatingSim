@@ -614,7 +614,7 @@ label library_1:
 
     jump halloween_party
 
-# See Artist in school store (Andrea)
+################ See Artist in school store (Andrea) ################
 label schoolstore_1:
     scene school store with dissolve
     play music "music/windswept.mp3" loop fadein 1.0
@@ -703,11 +703,11 @@ label schoolstore_1:
     august "It's my mom. I should take this. It was nice seeing you, though, [player_name]."
     player "It was nice seeing you too."
 
-    hide artist with fade
+    hide artist with dissolve
     stop music fadeout 1.0
 
     jump halloween_party
-
+################ End Artist Section, Jump to halloween_party ################
 
 label tenniscourts_1:
     scene tennis courts
@@ -802,9 +802,13 @@ label dorms_1:
 
     #####################################################################
     #
-    #  FOURTH SCENE: Halloween Party
-    #  > If Haunted House -- see bad boy & tsundere
-    #  > If Pumpkin Patch -- see prep & artist
+    #  FOURTH SCENE: Halloween Party Events
+    #  > If Haunted House 
+    #       > Go with Bad boy +Point
+    #       > Go with Tsundere +Point
+    #  > If Pumpkin Patch
+    #       > Go with Artist +Point
+    #       > Go with Prep +Point
     #
     #####################################################################
 
@@ -918,13 +922,73 @@ label haunted_house:
     jump free_time_2
 
 label pumpkin_patch:
-    "Pumpkin patch event"
+    "After deciding to go to the pumpkin patch, you run into..."
+    show prep at left with dissolve
+    show artist at right with dissolve 
+    victoria "I told you already, I don't want you to draw me! I have hay everywhere!"
+    august "And yet you still look beautiful! I need some practice... please?"
+    victoria "No!"
 
+    #   Depending on who you've met... 
+    if knowAugust == "true":
+        if assholeToAugust == "true":
+            august "Oh... I should go."
+            hide artist with moveoutright
+            show prep at center with move
+            victoria "...I guess that settles that! Let's go to the corn maze!"
+            $ prepPoints += 1
+            jump corn_maze
+        # If you know August and Victoria
+        if meetPrep == "true":
+            "Victoria and August!"
+        # If you only know August
+        else:
+            "August! and someone you don't recognize."
+            august "Oh hey! It's [player_name]."
+    else:
+        # If you only know Victoira
+        if meetPrep == "true":
+            "Victoria! and someone you don't recognize."
+            victoria "Oh look, there’s [player_name]. Help me get out of this, please."
+        # If you know Neither
+        else:
+            "Two strangers are having a heated argument!"
+
+    august "Sorry, we were just trying to figure out what we wanted to do..."
+    victoria "I want to go to the corn maze!"
+    august "I just want to sit here sketch stuff out, it's so lovely out here."
+    player_thinking "What do I want to do?"
+    # Go with Artist or Prep choice and points
     menu:
-        "Side with prep":
-            pass
-        "Side with artist":
-            pass
+        "Go with Victoria to the Corn Maze":
+            player "I haven't gone to a corn maze in a really long time, that sounds really fun!"
+            victoria "YAY!"
+            august "Ah, I think I'll just hang back here and draw the pumpkins... I hope you two have fun though!"
+            hide artist with dissolve
+            show prep at center with move
+            victoria "Let's go, [player_name]!" 
+            show heart with zoomin 
+            hide heart with dissolve 
+            $ prepPoints += 1
+            jump corn_maze
+
+        "Keep August Company":
+            player "It's beautiful out here, you should definitely draw something August."
+            player "If Victoria wants to go to the corn maze, I can keep you company instead."
+            victoria "I have an idea... you should draw [player_name]! I'll go to the maze!"
+            august "Are you sure? Well, I hope you have fun!" 
+            hide prep with dissolve
+            show artist at center with move
+            august "...let's go find a spot to sit."
+            show heart with zoomin
+            hide heart with dissolve
+            $ artistPoints += 1
+            jump draw_pumpkins
+    
+label corn_maze:
+    jump free_time_2
+
+label draw_pumpkins: 
     jump free_time_2
 
     #####################################################################
