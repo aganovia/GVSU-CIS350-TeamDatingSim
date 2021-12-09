@@ -18,9 +18,6 @@ define finley = Character("Finley")
 # define characters in debate
 define debateStudent = Character("Student")
 
-# Have you met a romanceable character?
-default knowAugust = "false"
-
 # Pronoun data setup
 default subj_pron = ""
 default obj_pron = ""
@@ -34,6 +31,7 @@ default meetPrep = "false"
 default skipped_class = "false"
 default haunted_house = "none"
 default messedUpDebate = "false"
+default knowAugust = "false"
 
 # Flags for Dom route
 default slept_in = "false"
@@ -69,10 +67,6 @@ label start:
     roomie "Oh my goodness you're here! You're here!"
     show roommate happy with moveinleft
     roomie "You're my new roommate, right?"
-
-    #FIXME heart for test and showing off! 
-    show heart with zoomin 
-    hide heart with dissolve 
 
     # ALEXIS: Name input
     python:
@@ -707,7 +701,6 @@ label schoolstore_1:
     stop music fadeout 1.0
 
     jump halloween_party
-################ End Artist Section, Jump to halloween_party ################
 
 label tenniscourts_1:
     scene tennis courts
@@ -746,7 +739,7 @@ label tenniscourts_1:
 
     menu:
         "Try my best":
-            player_thinking "I go 100% tryhard mode. I'm running around the court as swiftly as my legs can take me."
+            player_thinking "I go full tryhard mode. I'm running around the court as swiftly as my legs can take me."
             player_thinking "Dominic looks surprised. Guess he didn't expect me to go so hard."
             player_thinking "But I play to win!"
         "Not sweat it":
@@ -827,6 +820,7 @@ label halloween_party:
         "Pumpkin patch":
             jump pumpkin_patch
 
+# Haunted House Event - Badboy and Tsundere
 label haunted_house:
     scene haunted house outside
     play music "music/dark-times.mp3" loop fadein 1.0
@@ -921,7 +915,9 @@ label haunted_house:
 
     jump free_time_2
 
+# Pumpkin Patch event - Artist & Prep
 label pumpkin_patch:
+    scene pumpkin_patch with fade
     "After deciding to go to the pumpkin patch, you run into..."
     show prep at left with dissolve
     show artist at right with dissolve 
@@ -958,8 +954,8 @@ label pumpkin_patch:
     victoria "I want to go to the corn maze!"
     august "I just want to sit here sketch stuff out, it's so lovely out here."
     player_thinking "What do I want to do?"
-    # Go with Artist or Prep choice and points
     menu:
+        # Go with prep, jump to corn_maze
         "Go with Victoria to the Corn Maze":
             player "I haven't gone to a corn maze in a really long time, that sounds really fun!"
             victoria "YAY!"
@@ -972,6 +968,7 @@ label pumpkin_patch:
             $ prepPoints += 1
             jump corn_maze
 
+        # Go with artist, jump to draw_pumpkins
         "Keep August Company":
             player "It's beautiful out here, you should definitely draw something August."
             player "If Victoria wants to go to the corn maze, I can keep you company instead."
@@ -983,12 +980,52 @@ label pumpkin_patch:
             show heart with zoomin
             hide heart with dissolve
             $ artistPoints += 1
+            $ halloweenCompany = "August"
             jump draw_pumpkins
     
 label corn_maze:
     jump free_time_2
 
-label draw_pumpkins: 
+label draw_pumpkins:
+    stop music fadeout 1.0
+    scene sittin spot with fade
+    play music "music/windswept.mp3" loop fadein 1.0
+    show artist with dissolve
+    august "This is a nice spot, right?"
+    player "Yeah, I think so!"
+    august "So... about what Victoira said."
+    player "About you drawing me?"
+    august "Yeah! Uh-- How would you feel about that? Would that be okay?"
+    menu: 
+        "I'd like that":
+            play sound "audio/artist_laugh.mp3"
+            august "Really?! That's great!" 
+            august "My friends never really let me draw them, so I've never had a live model! I'm so excited!"
+            player "I wouldn't call myself a model..."
+            august "I mean, you're modeling for me, so-- wait sit still."
+            "August pulls out a sketchpad and charcoal from a bag they seem to carry everywhere."
+            menu: 
+                "I mean, don't models have to be gorgeous?":
+                    august "Not really. Even if they were, you *are* gorgeous so,"
+                    player_thinking "Did they just-"
+                    august "I mean--! I- Sorry, I hope I didn't meake you uncomfortable!"
+                    player "No no! It's okay..."
+                    player "Do you really think I'm beautiful?"
+                    august "... absolutely."
+                    player_thinking "Can they tell that I'm blushing?"
+                    august "Now sit still so I can draw you."
+                    "While August sketches out your outline, they start humming softly."
+                "Okay, okay, I'll sit still.":
+                    "While August sketches out your outline, they start humming softly."
+                "Actually, I changed my mind...":
+                    august "Oh! that's alright then, do you just want to sit and talk?"
+                    player "Yeah, that sounds nice."
+        "I'm not really comfortable with that":
+            august "Do you want to just sit and talk for a bit?"
+            player "Yeah, that sounds nice."
+        
+    "You spent the rest of the day talking with August. They seem to really like you."
+    stop music fadeout 1.0
     jump free_time_2
 
     #####################################################################
@@ -997,7 +1034,7 @@ label draw_pumpkins:
     #    > If library == see tsundere
     #    > If school store == see bad boy
     #    > If tennis court == see prep
-    #    > If dorm == see tsundere
+    #    > If dorm == see artist
     #
     #####################################################################
 
@@ -1130,8 +1167,119 @@ label tenniscourts_2:
 
     jump route_determination
 
+################ See Artist in Apartment (Andrea) ################
 label dorms_2:
-    "DORMS 2: ARTIST IS THERE"
+    play music "music/windswept.mp3" loop fadein 1.0
+    scene dorm room with fade
+    show artist with dissolve
+    "You enter your apartment and see August sitting on your couch."
+    if knowAugust == "false":
+        august "Oh! I was wondering when I'd run into you. You're [player_name], right?"    
+    if assholeToAugust == "true":
+        august "Oh, I'm sorry. I should go."
+        menu:
+            "Yes, you should.":
+                "August looks sad."
+                august "All of my friends think you're really nice... I don't understand it."
+                august "Why do you hate me? ...No, I don't want to know."
+                august "I'm sorry if I did or said anything that lead you to be so uncomfortable around me."
+                august "I'll stay out of your way."
+                hide artist with moveoutright
+                $ artistPoints = 0
+                jump route_determination 
+            "No, it's okay, stay. I should apologize.":
+                august "It's okay."
+                player "No it's not. I should've apologized a long time ago. You don't deserve to be treated like that."
+                august "That... is really kind of you. You confuse me, [player_name]."
+    else:
+        august "[player_name]! It's good to see you..."
+
+    august "Sorry, I don't mean to invade your space. I was just waiting for Jane to finish getting ready."
+    player "Are you two going somewhere?"
+    august "Yes? She was just gonna drive me to a little forest nearby so I can finish up a project I've been working on."
+    player "What kind of project?"
+    august "Well... It's a little weird. I might show you at some point, though. I've only shown Jane, so far."
+    menu:
+        "Go to your bedroom":
+            player "Well, I'll let you wait. I should go work on some homework."
+            august "Alright!"
+            hide artist with dissolve
+            scene bedroom 
+            "You've been working on homework for half hour when you hear a knock on the door."
+            august "Hey, [player_name]? Do you know where Jane went?"
+            player "What do you mean? I thought you were waiting for her."
+            august "I was, but I've been waiting for a little bit. I think she left."
+            menu:
+                "You can catch her next time then. Bye!":
+                    august "Oh, alright. I'll see you later then."
+                    jump route_determination
+                "What do you mean she left?":
+                    scene dorm room
+                    show artist with dissolve 
+                    "You come out of your bedroom to talk to August again."
+                    
+        "Stay with August":
+            player "How long have you been waiting for her?"
+            august "About half an hour."
+            player "Half an hour? That's a really long time. I can go check on her for you."
+            august "It's okay! I can wait. I don't really mind."
+            player "No, don't worry, I'll just go make sure everything is okay."
+            august "This happens sometimes, but I'm patient, you don't need to stress."
+
+    "You check Jane's room and find it empty. She's definitely left."
+    august "Ah, she texted me back."
+    player "What did she say?"
+    august "Shes hanging out with someone else... That's okay. I guess I'll go home."
+    menu:
+        "But you were really excited!":
+           pass
+        "Okay, bye now.":
+            august "Have a nice day okay?"
+            hide artist with dissolve
+            jump route_determination
+    august "I was. But like I said, this happens sometimes. She's a busy person, she has a lot of friends."
+    player "She could have at least told you she was leaving."
+    august "She said she forgot I was here."
+    player "That's not okay..."
+    menu:
+        "We should do something together.":
+            player "I know it's not what you originally had planend... but you're already here!"
+            august "You want to hang out with me?"
+            player "Yeah! What do you want to do? We can play board games, I have a few in my room. We could play video games. We could draw together. Anything you want! Something fun."
+            august "Really? Ah, [player_name], you don't have do comfort me."
+            player "I don't have to, but I want to. Let's do something fun!"
+            play sound "audio/artist_laugh.mp3"
+            august "... okay. Let's do something fun." 
+            show heart with zoomin 
+            hide heart with dissolve 
+            $ artistPoints += 1
+            "You and August spent the rest of the day together, and it meant the world to them."
+        "But I'm sure she meant no harm.":
+            player "I don't know her well yet, but she seems like a kind person."
+            august "She is, most of the time."
+            player "Most of the time?"
+            august "I'm starting to worry she doesn't really like me..."
+            player "I'm sure she does!"
+            august "You don't know that..."
+            player "I know that you're a very likeable person, though. So if she doesn't like you, then it's her being silly."
+            august "She's my friend."
+            player "And so am I, now. Because I know you're a good friend, so I want to be a good friend to you too."
+            august "I should get going."
+            player "You can stay if you want to."
+            play sound "audio/artist_laugh.mp3"
+            august "... I'll stay then."
+            show heart with zoomin 
+            hide heart with dissolve 
+            $ artistPoints += 1
+            "You and August spent the rest of the day together, and it meant the world to them."
+        "Maybe she doesn't love you.":
+            august "I know. I know that she doesn't."
+            player "Then what are you doing here?"
+            august "I don't know. Being stupid, I guess. I should go home."
+            player "Okay."
+            august "Okay."
+            $ assholeToAugust = "true"
+            hide artist with dissolve
 
     jump route_determination
 
