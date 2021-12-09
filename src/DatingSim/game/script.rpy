@@ -72,10 +72,6 @@ label start:
     show roommate happy with moveinleft
     roomie "You're my new roommate, right?"
 
-    #FIXME heart for test and showing off!
-    show heart with zoomin
-    hide heart with dissolve
-
     # ALEXIS: Name input
     python:
         name = renpy.input("What's your name?")
@@ -110,7 +106,7 @@ label start:
 
     roomie "Well, it's wonderful to meet you [player_name]. I already know we're going to have a lot of fun together."
     player "What do you mean?"
-    roomie "Well, first things first, lets get you settled in!"
+    roomie "Well, first things first, let's get you settled in!"
 
     hide roommate happy with dissolve
 
@@ -151,7 +147,7 @@ label start:
     "She hands you a piece of torn notebook paper with some questions written down on them."
 
     #start of quiz
-    roomie "Would you rather"
+    roomie "Would you rather..."
     menu:
             "Read a book at home":
                 $ artistPoints += 1
@@ -160,7 +156,7 @@ label start:
                 $ badboyPoints += 1
                 $ tsunPoints += 1
 
-    roomie "Would you rather have"
+    roomie "Would you rather have..."
     menu:
         "A close group of friends":
             $ artistPoints += 1
@@ -186,16 +182,17 @@ label start:
     player "Don't know what?"
     roomie "Who you'd be cuter with!"
     player "What do you mean?"
-    roomie "My friends! I'd love for you to meet them soon. Some of them have been looking for someone,"
-    roomie "some haven't but really should.They're really nice! I'm sure you'd like them."
-    roomie "Dominic is my oldest friend. He's a bit of a meanie but he's got the whole badboy look going on"
-    roomie "AND he is a serious hottie"
+    roomie "My friends! I'd love for you to meet them soon."
+    roomie "Some of them have been looking for someone, some haven't but really should."
+    roomie "They're really nice! I'm sure you'd like them."
+    roomie "Dominic is my oldest friend. He's a bit of a tease but he's got the whole badboy look going on."
+    roomie "AND he's a serious hottie."
     roomie "Victoria is honest. She can be blunt, but she's also the most sincere person I've met."
     roomie "August I didn't meet until freshman year, but they've been super helpful whenever I'm feeling down."
     roomie "They have the softest heart."
-    roomie "And then there's is Finley they have a tough exterior but they are really sweet once you get to know them." #FIXME
-    roomie "But! You'll meet them all eventually, I'm sure"
-    roomie "Look at me prattling on, I should let you get some rest before tomorrow! First day!"
+    roomie "And then there's Finley. They have a tough exterior, but they are really sweet once you get to know them."
+    roomie "But! You'll meet them all eventually, I'm sure."
+    roomie "Look at me prattling on. I should let you get some rest before tomorrow! First day!"
 
     hide roommate happy with dissolve
 
@@ -212,25 +209,24 @@ label start:
     #####################################################################
 
     scene outside campus 1 with fade
-    "After classes"
-    player_thinking "First day of school tends to be exciting, but generally uneventful."
+
+    player_thinking "The first day of school is nerve-wracking, but generally uneventful."
+    player_thinking "All of my classes went smoothly. Mostly reading through syllabuses. Syllabi?"
     player_thinking "It's been a long day, but there's one last thing I should do before I leave..."
-
-
-    jump choose_club
-
-label choose_club:
-    "Choose a club."
+    player_thinking "At orientation they mentioned a number of clubs. Maybe I should join one."
 
     menu:
         "Graphic Design Club":
             $ club = "graphic design club"
+            "I think I'll join the graphic design club."
             jump meet_artist
         "Debate Team":
             $ club = "debate team"
+            "I think I'll join the debate team."
             jump meet_prep
         "No club":
             $ club = "no club"
+            player_thinking "None of the clubs sound right for me right now. I think I'll get some food."
             jump meet_tsun
 
 # Meet Artist: Andrea
@@ -297,11 +293,9 @@ label meet_artist:
 label meet_tsun:
     #meet TSUN
     play music "music/easy-lemon.mp3" loop fadein 1.0
-    scene school store   #is this the right scene for the store
+    scene school store
 
-    player_thinking "None of the clubs sound right for me. I guess I should just go get some food."
-
-    player_thinking "Hey that person over there looks familiar I should go say hi."
+    player_thinking "Hey, that person over there looks familiar. I should go say hi."
 
     show finley
 
@@ -313,25 +307,25 @@ label meet_tsun:
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
-            finley "Thanks for the compliment, not that I needed one. Oh you must be Jane’s roommate. Name’s Finley."
-            player_thinking "Are they blushing, and is that a soft smile on their face."
+            finley "Thanks for the compliment, not that I needed one. You must be Jane’s roommate. Name’s Finley."
+            player_thinking "Are they blushing? And is that a soft smile on their face?"
 
         "I think you're friends with my roommate.":
-            finley "Oh you must be Jane’s roommate. Name’s Finley."
+            finley "Oh, you must be Jane’s roommate. Name’s Finley."
 
     finley "So what are you doing here?"
     player "I was hungry so I decide to go get some food."
-    finley "You should try the grilled cheese its very good."
+    finley "You should try the grilled cheese. It's very good."
 
     menu:
         "I love grilled cheese!":
-            finley "I know right it is just good, or whatever."
-            player_thinking "Their smile so bright."
+            finley "I know right? It is just so good, or whatever."
+            player_thinking "Their smile is so bright."
 
         "I was actually thinking some pizza.":
-            finley "Well pizza is good to."
+            finley "Yeah, pizza is good too."
 
-    finley "Well I should get going see you later not that I excited to run into you again."
+    finley "Well I should get going. See you later. Not that I'm excited to run into you again."
 
     hide finley
 
@@ -345,7 +339,7 @@ label meet_prep:
 
     $ joinedDebateTeam = "true"
 
-    player_thinking "I guess there’s a debate team recruiting event going on today. I could probably improve my argumentation skills…"
+    player_thinking "I guess there’s a debate team recruiting event going on today. I could probably improve my argumentation skills..."
 
     player_thinking "I guess I'll give it a try."
 
@@ -359,7 +353,7 @@ label meet_prep:
 
     player_thinking "A student is standing next to the table, scribbling something on a clipboard. "
 
-    player_thinking "Her hair is a deep brown, and her eyes are grey. "
+    player_thinking "Her hair is a deep brown, and her eyes are grey."
 
     player_thinking "She’s wearing a beige sweater with black slacks, a pretty bland outfit overall."
 
@@ -498,6 +492,9 @@ label meet_badboy:
         "W-what?":
             $ badboyPoints += 1
             player "Er, sorry, I didn't mean to stare..."
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             dom "Haha! I was just teasing."
 
     dom "So, what're you up to? Heading to class?"
@@ -584,7 +581,7 @@ label library_1:
 
             victoria "Sigh."
 
-            victoria "Alright, I think I'm done for the day. I'm going back to my dorm, I have plans with my roommate tonight."
+            victoria "Alright, I think I'm done for the day. I'm going back to my dorm. I have plans with my roommate tonight."
 
             victoria "It was fun studying with you, let's do it again sometime!"
 
@@ -592,7 +589,7 @@ label library_1:
 
             hide prep with moveoutleft
 
-            player_thinking "I watch her walk away. I'm starting to think that we could becom friends! Or possibly more..."
+            player_thinking "I watch her walk away. I'm starting to think that we could become friends! Or possibly more..."
         "Go behind her and scare her!":
             player_thinking "Yeah, why not? This will be hilarious!"
 
@@ -766,7 +763,7 @@ label tenniscourts_1:
 
     menu:
         "Try my best":
-            player_thinking "I go 100% tryhard mode. I'm running around the court as swiftly as my legs can take me."
+            player_thinking "I go full tryhard mode. I'm running around the court as swiftly as my legs can take me."
             player_thinking "Dominic looks surprised. Guess he didn't expect me to go so hard."
             player_thinking "But I play to win!"
         "Not sweat it":
@@ -774,10 +771,14 @@ label tenniscourts_1:
             player_thinking "I don't try too hard. I can see that Dominic clearly doesn't, either."
             player_thinking "We both goof off as we swing our rackets around with the mindset of 'If I don't hit the ball, I don't hit the ball. Big whoop.'"
             player_thinking "By the end of it, we're both laughing at each other."
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
 
     dom "Are the tennis courts everything you hoped for?"
     player "Oh, yes. And so much more."
     dom "Heh. That was actually the first time I'd done anything besides loitering at this place. Was pretty fun."
+    player_thinking "Is it really loitering if they're open to anyone...?"
     player_thinking "I peek down at my watch and realize it's almost time for my next class."
     player "Hey, I've got class to get to, but thanks for the game."
 
@@ -806,22 +807,22 @@ label dorms_1:
 
     player_thinking "Is that Finley hanging out with Jane?"
 
-    finley "Hey [player_name], me and Jane were just trying  to plan a prank on Dominic want to join us not that we need you or anything."
+    finley "Hey [player_name], me and Jane were just trying to plan a prank on Dominic. Wanna join us? Not that we really need you."
 
     menu:
-        "Sure sounds like fun!":
+        "Sure, sounds like fun!":
             $ tsunPoints += 1
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
-            finley "Awesome I was think about something with spiders since Dominic is afraid of them."
-            player "What about a plastic spider that drops down when he opens the door."
-            finley "That is perfect! I need to go buy a plastic spider now see you later [player_name]!"
+            finley "Awesome. I was thinking something with spiders since Dominic is afraid of them."
+            player "What about a plastic spider that drops down when he opens the door?"
+            finley "That is perfect! I need to go buy a plastic spider then. See you later [player_name]!"
             player_thinking "They are really blushing with such a bright smile. They must really like pranks."
 
-        "No thanks I am going to head to my room to relax.":
-            finley "That's fine have fun relaxing."
-            player_thinking "Is that a frown on their face?"
+        "No thanks. I am going to head to my room to relax.":
+            finley "That's fine. Have fun relaxing."
+            player_thinking "They're frowning at me... ah well."
 
     hide finley
 
@@ -880,6 +881,9 @@ label haunted_house:
             $ badboyPoints += 1
             $ haunted_house = "true"
             player "Yeah, why not? It looks fun."
+            play sound "audio/badboy_laugh.mp3"
+            show heart at left with zoomin
+            hide heart with dissolve
             player_thinking "A smug grin overtakes Dominic's face, showing the triumph he feels over coming out the victor in this battle."
             player_thinking "Finley looks like they're over it."
             dom "See? [player_name] has the right idea."
@@ -919,7 +923,7 @@ label haunted_house:
         "Side with Finley":
             $ tsunPoints += 1
             play sound "audio/tsundere.mp3"
-            show heart with zoomin
+            show heart at right with zoomin
             hide heart with dissolve
             $ haunted_house = "false"
             player "No, you have a point, Finley. Why risk it?"
@@ -1088,11 +1092,11 @@ label library_2:
 
     show finley
 
-    player_thinking "Is that Finley at that table over there? I should go see what they are doing."
+    player_thinking "Is that Finley at that table over there? I should go see what they're doing."
 
     player "What are you doing here Finley?"
 
-    finley "Hey [player_name] I have this big test coming up so I need to really study."
+    finley "Hey [player_name]. I have this big test coming up so I really need to study."
 
     menu:
         "Do you want some help?":
@@ -1100,13 +1104,13 @@ label library_2:
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
-            finley "Really thanks for the help not that I couldn’t mange on my own."
+            finley "Really? Thanks for the help. Not that I couldn’t manage on my own."
             player_thinking "Finley is blushing so much."
-            player_thinking "Finley and I spent the next 3 hours studying for their test."
+            player_thinking "Finley and I spent the next three hours studying for their test."
 
-        "Well I will leave you alone to study.":
-            finley "Sure see you some other time."
-            player_thinking "Well I should get back to looking for some books."
+        "I'll leave you alone to study.":
+            finley "Sure. See you some other time."
+            player_thinking "I should get back to looking for some books."
 
     hide finley
 
@@ -1165,6 +1169,9 @@ label schoolstore_2:
             player_thinking "Guess I better put this keychain back before I leave."
         "What? Of course not!":
             $ badboyPoints += 1
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             dom "Haha! Don't want to make yourself an accomplice... no matter. I am a professional, anyhow."
             dom "Aaaand done."
             player "What?! You didn't even move!"
@@ -1408,6 +1415,9 @@ label dominic_event_1:
             $ badboyPoints += 1
             player "I write poetry sometimes."
             player "It's less work than writing full novels. It can be kinda cathartic, too."
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             dom "Really? That's kinda cool. That's not a common answer."
             dom "Can I read it sometime?"
             player_thinking "This guy wants to read poetry?"
@@ -1490,6 +1500,9 @@ label dominic_event_2:
             player "I can't tell you how to live your life, but that's the way I see it."
             dom "Hm."
             player_thinking "There's a silence. Was I too harsh?"
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             dom "You know, only one other person has actually said that to me before."
             dom "Not even my parents told me that. There was no protest when I started getting in trouble. It was like they expected it."
             if answered_door == "false":
@@ -1567,6 +1580,9 @@ label dominic_event_3:
             player_thinking "The smug air around him faded. The facade, the mask he puts on, finally came off."
             player_thinking "He looked down at the ground, like a dog with its tail between its legs."
             player_thinking "Why am I scolding a grown adult? Did I overstep?"
+            play sound "audio/badboy_laugh.mp3"
+            show heart with zoomin
+            hide heart with dissolve
             dom "You know, [player_name], you remind me a lot of this buddy I had growing up."
             dom "He was my best friend in school. I messed with him all the time because his reactions were funny."
             dom "I never told him I was having a hard time. We only had fun together. I didn't want to have it any other way."
@@ -1852,8 +1868,6 @@ label victoria_event_3:
                 stop music
                 jump FINAL_PARTY
 
-
-
 label ARTIST_START:
     # artist route
     "ARTIST ROUTE START"
@@ -1871,35 +1885,37 @@ label TSUNDERE_START:
 
     player_thinking "I think that's Finley over there."
 
-    finley "Hey [player_name] do you want to go thrift shopping with me, not that I want to hangout with. I just need someone to help me carry bags."
+    finley "Hey [player_name], do you want to go thrift shopping with me? Not that I want to hangout. I just need someone to help me carry bags."
 
     menu:
-        "Sure I would love to go thrift shopping!":
+        "Sure, I would love to go thrift shopping!":
             $ tsunPoints += 1
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
-            finley "Cool let's head over there now."
+            finley "Cool. Let's head over there now."
 
-            scene thrift_shop #this should be another store fixed this
+            scene thrift_shop
 
             show finley
 
-            player "So Finley why do you love thrift shopping?"
+            player "So Finley, why do you love thrift shopping?"
 
-            finley "Well I am the youngest of 8 kids so I always got my sibling hand me downs. After a while I grew to love to mismatch mess so now I go thrift shopping to what weird and wonderful things I might find."
+            finley "Well, I am the youngest of 8 kids so I always got my siblings' hand-me-downs."
 
-            player_thinking "Finley is reaching over to a shirt on the rack."
+            finley "After a while I grew to love mismatched mess so now I go thrift shopping to see what weird and wonderful things I might find."
+
+            player_thinking "Finley reaches over to a shirt on the rack."
 
             finley "This would look really good on you. You should go try it on."
 
-            player_thinking "I take the shirt from Finley and go put it on I come out to see Finley try to cover their blush."
+            player_thinking "I take the shirt from Finley and go put it on. I come out to see Finley try to cover their blush."
 
             finley "That really does look good on you."
 
             player_thinking "We spent the rest of the afternoon shopping together."
 
-            finley "I had fun maybe your not so bad to hangout with."
+            finley "I had fun. Maybe you're not so bad to hangout with."
 
             player_thinking "I can see the smirk and blush on Finley’s face. They had more fun than they are saying."
 
@@ -1910,7 +1926,6 @@ label TSUNDERE_START:
 
     hide finley
 
-
     #second event
 
     scene outside campus 2  #should be the campus
@@ -1919,13 +1934,13 @@ label TSUNDERE_START:
 
     player_thinking "Finley is over there."
 
-    finley "Hey [player_name] do you want to come over to my dorm to watch some movies?"
+    finley "Hey [player_name], do you want to come over to my dorm to watch some movies?"
 
     player_thinking "If Finley had a tail it would be wagging right now."
 
-    player "Sure movies sounds like fun!"
+    player "Sure, sounds like fun!"
 
-    finley "Awesome see you tonight not that I really wanted you to say yes."
+    finley "Awesome. See you tonight. Not that I really wanted you to say yes."
 
     scene dorm room
 
@@ -1933,7 +1948,7 @@ label TSUNDERE_START:
 
     show finley
 
-    finley "Hey [player_name] I am just finishing up with the popcorn if you want to go pick a movie."
+    finley "Hey [player_name], I am just finishing up with the popcorn if you want to go pick a movie."
 
     menu:
         "Choose the bad movie":
@@ -1941,8 +1956,8 @@ label TSUNDERE_START:
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
-            finley "That movie is bad it's amazing good choice!"
-            player_thinking "Finley face lit up like a christmas tree when I chose this movie and is that a blush on their cheeks. Finley picks up the movie to put it in the DVD player."
+            finley "That movie is so bad it's amazing. Good choice!"
+            player_thinking "Finley's face lit up like a christmas tree when I chose this movie. Finley picks up the movie to put it in the DVD player."
         "Choose the good movie":
             finley "That's a cool choice."
             player_thinking "Is Finley sad that I didn't choose the bad movie?"
@@ -1965,35 +1980,35 @@ label TSUNDERE_START:
 
             player_thinking "Finley seems really sad that I said no."
 
-        "Sure cooking with you sounds like a lot of fun!":
+        "Sure, cooking with you sounds like a lot of fun!":
             $ tsunPoints += 1
             play sound "audio/tsundere.mp3"
             show heart with zoomin
             hide heart with dissolve
 
-            finley "Well see you tonight!"
+            finley "Well, see you tonight!"
 
             player_thinking "Did Finley ask me to hangout without hiding their feelings, or their blush?"
 
-            player_thinking "No must of been my imagination."
+            player_thinking "Must have been my imagination."
 
             scene dorm room
 
-            player_thinking "I am here at Finley’s dorm I am going to knock."
+            player_thinking "Here I am at Finley's dorm... I am going to knock."
 
             show finley
 
-            finley "Hey come on in I was just setting everything up. We are making grilled cheese."
+            finley "Hey, come on in. I was just setting everything up. We are making grilled cheese."
 
-            player "Finley do you like to cook?"
+            player "Do you like to cook?"
 
             finley "When I was young my mom taught me how to cook. She would make me grilled cheese every time I was sick. So now when I am homesick I use her grilled cheese recipe."
 
             player_thinking "Finley helped me cook some delicious looking grilled cheese we sat down to dig into them."
 
-            finley "[player_name] thanks for hanging out me I really like your company."
+            finley "[player_name], thanks for hanging out me I really like your company."
 
-            player_thinking "Finley just told me they like to hangout with me and no mean comment. They are even blushing with the softest smile. I can’t believe what is happening!"
+            player_thinking "Finley just told me they like to hangout with me with no mean comment. They are even blushing with the softest smile. I can’t believe what is happening!"
 
             player "Thank you for inviting me Finley. I like hanging out with you too."
 
@@ -2015,9 +2030,9 @@ label FINAL_PARTY:
 
     scene outside campus 2
 
-    player_thinking "I'm at the New Year's party. Everything looks so nice."
+    player_thinking "I'm at the New Year's party. Everything's nicely decorated, everyone's dressed their best..."
 
-    player_thinking "Everyone looks so good I wonder who I should to ask to dance?"
+    player_thinking "Who should I ask to dance with?"
 
     menu:
         "Dominic":
