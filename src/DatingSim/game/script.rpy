@@ -265,7 +265,7 @@ label meet_artist:
                     show heart with zoomin 
                     hide heart with dissolve 
                     $ artistPoints += 1
-                "...Ew, that's weird.":
+                "...Ew, that's weird. Don't talk to me.":
                     august "Oh. Sorry."
                     $ assholeToAugust = "true"
         "Tell August they're being creepy":
@@ -1304,6 +1304,16 @@ label route_determination:
 
     return
 
+    #####################################################################
+    #
+    #  ROUTES BASED ON POINTS
+    #    > Badboy Route
+    #    > Prep route
+    #    > Artist route
+    #    > Tsundere route
+    #
+    #####################################################################    
+
 label BADBOY_START:
     scene bedroom
     play music "music/easy-lemon.mp3" loop fadein 1.0
@@ -1861,12 +1871,213 @@ label victoria_event_3:
                 player_thinking "I hope we can still work it out."
                 jump FINAL_PARTY
 
-
+#####################################################################
+#
+#  ARTIST ROUTE START (Andrea)
+#
+#####################################################################
 
 label ARTIST_START:
-    # artist route
-    "ARTIST ROUTE START"
-    return
+    scene black
+    "You seem to have taken a fondness to August. It's been a few days since you last saw them."
+    play music "music/windswept.mp3" loop fadein 1.0
+    scene dorm room with fade
+    "Just when you think you are starting to miss them, they ask you if they can come over."
+    show artist with dissolve
+
+    august "Thank you for letting me coming over, [player_name]. I know it was a little bit last minute, but I haven't seen you in a while."
+    player "Not a problem at all! I was honestly really glad you called."
+    august "You were?"
+    player "Yeah... I kinda missed you. So, do you have anything in mind that you want to do?" 
+    august "Yeah! I was kinda hoping we could just go on a walk and talk for a little bit."
+    player "Absolutely, let me get my shoes."
+
+    ####### Scene 1
+    scene autumn trees with fade
+    show artist with dissolve 
+    player "So, what did you want to talk about?"
+    august "Well, we've been spending some time together lately..."
+    player "Yes?"
+    august "But I've kind of been hoping to get to spend more time with you."
+    menu:
+        "I would like that": 
+            play sound "audio/artist_laugh.mp3"
+            august "I really like you [player_name]!"
+        "I don't know about that...":
+            august "Oh? do you not want to?"
+            player "That's not what I said. I just need to think about it, yeah?"
+            august "Absolutely, take all the time you need." 
+    player "Is there anything else you had in mind?"
+    august "I don't know, there are always a lot of things on my mind."
+    player "Like what?"
+    august "Like the way the trees move look like they're waving us goodbye, like we're going on a long journey, or they are. Especially when they're losing leaves like this."
+    menu: 
+        "Ugh, August, why do you say such weird things?":
+            $ assholeToAugust = "true"
+            august "Oh. Sorry, I didn't mean to say something weird." 
+            player "Well, you did. But it's okay, I still like you."
+            "August smiles, but they look confused."
+        "Who do you think is going on a journey?":
+            player "The leaves or us?"
+            august "Could be both, could be neither. I guess we'll just have to find out."
+    august "But that's what I'm thinking about. I really like the ambiance of fall. It makes me want to sit and watch the leaves, maybe sketch or write."
+    menu: 
+        "Why don't we do that?":
+            august "Actually, yeah, why not?"
+            player "Yeah! Why not! We can find a tree to be creative under."
+            play sound "audio/artist_laugh.mp3"
+            august "absolutely"
+            "August sits down on the floor and pulls out a sketchpad."
+            august "Tell me about yourself."
+            "They watch you as they passively sketch something out in their artist pad. They seem to be having a lot of fun doing so."
+            show heart with zoomin
+            hide heart with dissolve
+            $ artistPoints += 1
+        "Not right now. I know you need to practice, your art obviously needs work. But I'll get so bored...":
+            player "I mean, I'm right here in front of you, aren't I important?"
+            august "Wait, you don't like my art?"
+            player "I mean, it's amazing for your audience, I'm guess. Just not my preference."
+            august "Oh? Uh. Okay... we can do something else."
+            player "Yeah! I really like you, I'm so excited to spend time with you."
+            august "You are? Yeah, okay, sure! ...Let's do something together."
+            "You both end up going back to your apartment and watching a show you pick out."
+            $ assholeToAugust = "true"
+
+    ####### Scene 2
+    scene black with fade
+    "You've been texting more with August recently and you're starting to get to know them better. They seem to really like you."
+    if assholeToAugust == "true":
+        "Even if they get a little skittish around you."
+    "So a couple of days later, they invite you to their favorite coffee shop."
+    scene coffee shop with fade
+    show artist at right with dissolve
+    august "I'm glad you're here. What do you want to drink? I'll get it for you."
+    menu:
+        "What do you recommend?":
+            august "I love their lattes! They have some really cool and unique flavors... do you want me to pick something for you?"
+            player "I've never been here, I bet you have the best recommendations! I like drinks that are more balanced between sweet and coffee."
+            august "I know exactly what to get!"
+        "How about I'll treat you this time? What do you want?":
+            august "Oh! You don't have to do that... that's so sweet."
+            player "I want to! You can buy next time."
+            play sound "audio/artist_laugh.mp3"
+            august "Alright, alright! I think I want a toffee latte."
+            player "Coming right up, cutie!"
+            "You see august blush."
+        "Nothing here really looks good...":
+            august "Ah, just try it out? Please? It's one of my favorite shops."
+            player "Alright, I guess I can give it a try. Just cause you're cute."
+            "August seems flustered."
+            august "Are you craving anything special?"
+            player "Just get me whatever, but come back soon."
+    
+    "A few moments later you both sit with coffees in hand. August is fidgeting with his cup."
+    menu:
+        "Is everything okay?":
+            august "Yeah! Yeah, everything is alright."
+            player "It doesn't seem alright..."
+            august "No, it is! It is, I promise... I just really like being around you."
+            player "I like being around you too."
+            august "No, like-- A lot. I want to be around you more often."
+            player "....I want to be around you more often too."
+            player "Do you want to go out on a date?"
+        "C'mon, why aren't you happy? We came here for you.":
+            august "Sorry, sorry. You just make me nervous. But in a good way! I think..."
+            player "Well, that's good. Because I really like you."
+            august "You do? Sometimes I wonder... cause I get nervous, that you only hang out with me cause you feel sorry for me."
+            player "Don't be silly!"
+            player "We should go on a date."
+            $ assholeToAugust = "true"
+    player "like a proper date."
+    august "I think I would like that..."
+    player "... Does this, right now, feel a little bit like a date to you?"
+    august "It does... would you want it to be? A date? Are you serious about it? Do you like me... in that way." 
+
+    if assholeToAugust == "true":
+        player "I'm falling in love with you."
+        august "You are??"
+        player "I am."
+        august "We've only known each other for a short time."
+        player "Does that matter? You are... something else. There's just something about you that I can't ignore." 
+    else:
+        player "I do. I really do."
+        show heart at right with zoomin
+        hide heart at right with dissolve
+        $ artistPoints += 1
+    "August doesn't say anything else about it, but you both talk comfortably for a while after that. Neither of you wants to get up and leave that moment."
+    if assholeToAugust == "true":
+        "You're going to have so much fun with them."
+    else:
+        "Something wonderful seems to be starting."
+
+    ####### Scene 3
+    scene black with fade
+    "A couple of weeks later, you and August are spending more and more time together."
+    
+    if assholeToAugust == "true":
+        "You take them out on a stroll around campus in the snow."
+        jump freezing_walk
+    else:
+        "They finally decide to show you their secret project."
+        jump secret_project
+    
+label freezing_walk:
+    scene outside dorms snow with fade
+    show artist with dissolve
+    august "Thank you for bringing me here, [player_name]"
+    player "Anything for my sweet heart."
+    august "You're being so kind to me..."
+    player "I'm always kind to you."
+    "August starts chewing his lips nervously, a habit you noticed a couple of weeks ago."
+    player "What's making you nervous, August?"
+    august "I just never know how you're going to respond."
+    player "What do you mean?"
+    august "Sometimes you treat me like I mean the world to you, and sometimes..."
+    player "I know I have a bit of a temper."
+    august "It's more than that. You're really unpredictable."
+    player "Isn't that a good thing?"
+    august "I suppose..."
+    player "I love you."
+    "You've been saying it to each other openly since that day at the coffee shop."
+    player "I love you more than anyone has ever loved you, and more than anyone ever will."
+    "August looks like they want to cry. Out of joy or sadness, neither of you can tell."
+    jump FINAL_PARTY
+
+label secret_project:
+    august "I've been building this for... probably over a year now."
+    "You've been following them through the forest for a bit now, going deeper into the thicket."
+    player "Building? Is that why your hands are calloused?"
+    august "Ah! Yeah, actually. I'm surprised you noticed that!"
+    scene cabin with fade
+    show artist at right with dissolve 
+    august "What do you think?"
+    player "August! This is so cool! I didn't even know you could build!"
+    august "I know it's really childish, I just never got a treehouse as a kid, and I was really excited to make a little creative space for myself."
+    player "I'm amazed! You're so talented! How did you manage this! Where even are we?"
+    august "It's a little forest in the property of a distant family member. They don't come by a lot, but they let me built this here."
+    player "It reminds me of a tiny little cottage."
+    august "Yes! That's exactly what I wanted. I've always had this escapist dream of running away to a cottage in the woods."
+    player "Sometimes you have to make those dreams a reality, right? That's what you've been doing."
+    august "Just... trying to make a little space that makes me happy."
+    player "And you wanted to share it with me?"
+    august "I did... because you make me happy."
+    show heart at right with zoomin
+    hide heart at right with dissolve
+    "You spend the rest of the day together creating art together in the tiny cabin. August looks so happy."
+    jump FINAL_PARTY
+    
+
+
+    
+    
+
+
+
+
+
+
+
+# Tsundere Start
 
 label TSUNDERE_START:
     # tsundere route
