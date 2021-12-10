@@ -34,6 +34,7 @@ default messedUpDebate = "false"
 default knowAugust = "false"
 default sidedWithAugust = "false"
 default joinedDebateTeam = "false"
+default assholeToAugust = "false"
 
 # Flags for Dom route
 default slept_in = "false"
@@ -553,7 +554,7 @@ label library_1:
     menu:
         "No scaring today. Go in front of her and wave.":
             $ prepPoints += 1
-            player_thinking "Nah, I don't fee like messing with her. It's probably not a good idea anyways."
+            player_thinking "Nah, I don't feel like messing with her. It's probably not a good idea anyways."
 
             player_thinking "I walk closer to her desk and give a little wave. She surprisingly looks up at me, smiles, and takes out her earphones."
 
@@ -1790,7 +1791,7 @@ label dominic_event_3:
 
 label PREP_START:
     # prep route
-    scene dorm room
+    scene dorm room with fade
     play music "music/past-sadness.mp3" loop fadein 1.0
     player_thinking "Here I am in Victoria's dorm room. I never thought she would invite me here."
     player_thinking "In fact, we've actually become friends!"
@@ -2394,7 +2395,7 @@ label FINAL_PARTY:
     # - need at least 6 points with the chosen character to get their "good ending" (a picture of the character with them)
     # OTHERWISE bad ending picture / MC dances alone :(
 
-    scene outside campus 2
+    scene final party
 
     player_thinking "I'm at the New Year's party. Everything's nicely decorated, everyone's dressed their best..."
 
@@ -2403,6 +2404,7 @@ label FINAL_PARTY:
     menu:
         "Dominic":
             if(badboyPoints >= 6):
+                player_thinking "I asked Dominic to dance with me. He said yes!"
                 if(portrait_number == 1):
                     show dominic portrait 1
                     player_thinking "The End"
@@ -2416,10 +2418,12 @@ label FINAL_PARTY:
                     show dominic portrait 4
                     player_thinking "The End"
             else:
+                player_thinking "I asked Dominic to dance with me. He called me a loser and walked away."
                 jump BAD_END
 
         "Victoria":
             if(prepPoints >= 6):
+                player_thinking "I asked Victoria to dance with me. She said yes!"
                 if(portrait_number == 1):
                     show victoria portrait 1
                     player_thinking "The End"
@@ -2433,10 +2437,12 @@ label FINAL_PARTY:
                     show victoria portrait 4
                     player_thinking "The End"
             else:
+                player_thinking "I asked Victoria to dance with me. She glared at me like I was a peasant before vacating the premises."
                 jump BAD_END
 
         "August":
             if(artistPoints >= 6):
+                player_thinking "I asked August to dance with me. They said yes!"
                 if(portrait_number == 1):
                     show august portrait 1
                     player_thinking "The End"
@@ -2450,10 +2456,12 @@ label FINAL_PARTY:
                     show august portrait 4
                     player_thinking "The End"
             else:
+                player_thinking "I wanted to ask August, but I can't find them anywhere... maybe they didn't show up?"
                 jump BAD_END
 
         "Finley":
             if(tsunPoints >= 6):
+                player_thinking "I asked Finley to dance with me. They said yes!"
                 if(portrait_number == 1):
                     show finley portrait 1
                     player_thinking "The End"
@@ -2467,12 +2475,13 @@ label FINAL_PARTY:
                     show finley portrait 4
                     player_thinking "The End"
             else:
+                player_thinking "I asked Finley to dance with me. They asked why they would want to dance with *me* before walking off."
                 jump BAD_END
     return
 
 label BAD_END:
     # general bad ending
     player_thinking "I guess I'm dancing on my own..."
-    scene bad ending #don't know if we will have a picture for this ending
-    player_thinking "The End"
+    scene bad ending
+    player_thinking "END"
     return
