@@ -20,7 +20,11 @@ Game features will include:
 
 ## Prerequisites
 
-## Run Instructions
-To run the game first go to [Renpy Download](https://www.renpy.org/latest.html) to get Renpy on your computer. Next go to whatever software you use for git and clone this repository. After the repository has been clone open the renpy folder that you downloaded. From there click one of the Renpy application files, and this will load up Renpy. Once you see a Renpy logo on your taskbar then go the bottom right corner and click on prefrences. Once there click Projects Directory and find this repository in your file system, and then go into the folder until see the SRC folder. The path should look something like this previousfolders\GVSU-CIS350-TeamDatingSim\src once you have something similar click okay. Now push continue and return. The game should now be listed under projects if not then hit the refresh button. If it still doesn't show then check the preference is set correctly. Finally click on the game and puch the launch project button. The game will load up in a seperate window.
+If running the game through the RenPy launcher, the RenPy SDK will need to be installed. More instructions on that under "Run Instructions" below.
 
-As a simpler option, here is a link to distributions https://drive.google.com/drive/folders/1az7ftY8EJRIvNACc6j2xvsX73XWzscc9?usp=sharing
+## Run Instructions
+There are two ways to run the game: 1) using a PC/Mac build executable, or 2) through the RenPy Launcher.
+
+1. Follow [this link](https://drive.google.com/drive/folders/1az7ftY8EJRIvNACc6j2xvsX73XWzscc9?usp=sharing) to a Google Drive folder containing zip files of PC and Mac builds of the game. Download the appropriate build for your OS, extract the files, and run the "DatingSim.exe" file.
+
+2. First go to [Renpy Download](https://www.renpy.org/latest.html) and install RenPy on your computer. Next, clone this repository. After the repository has been cloned, open the RenPy SDK folder that you downloaded. From there, click the "renpy.exe" file to launch the RenPy Launcher. In the launcher, click the "Preferences" button in the lower right.. Once there, click "Projects Directory" and set the path to the "src" directory from this repo. The path should look something like this: "reviousfolders\GVSU-CIS350-TeamDatingSim\src". Click okay, push continue, and return. The game should then be listed under Projects; if not, click the refresh button. If it still doesn't appear, check the preferences to make sure the Projects Directory is properly set. Finally click on the game and click "Launch Project". The game will load up in a separate window.
