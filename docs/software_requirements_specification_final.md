@@ -25,8 +25,8 @@ Requirements are organized into two sections: Functional Requirements and Non-fu
    - FR13. Game dialogue shall be influenced by dialogue options chosen by the player.
 4. Story Branching
    - FR14. The game shall branch into different storylines according to chosen dialogue options.
-   - FR15. The player shall unlock the good ending of a romanceable character when the player has enough favor points with the character.
-   - FR16. The game shall commence the bad ending if not enough favor points were earned for any romanceable character.
+   - FR15. The game shall commence a good ending when the player has at least six favor points with the character asked to dance at the final New Year's Party event.
+   - FR16. The game shall commence the bad ending if less than six favor points were earned for the character asked to dance at the final New Year's Party event.
    - FR17. The game shall contain four "routes", one for each romanceable character.
    - FR18. The game shall commence the character route for whichever romanceable character has the highest number of favor points earned.
 5. Gallery Screen
@@ -64,6 +64,8 @@ Requirements are organized into two sections: Functional Requirements and Non-fu
    - NFR20. Images, such as character sprites and backgrounds, shall be sized appropriately to fit the game window.
    - NFR21. Image buttons shall display a different image when hovered over with the mouse.
    - NFR22. Images in the Gallery menu shall be displayed in a grid.
+   - NFR23. Good endings shall display different images based on the character asked to dance at the New Year's Party event.
+   - NFR24. Good endings shall display different images based on the portrait the player chose to represent their appearance.
 
    # Software Artifacts
    This section lists all of our artifacts from our project. These artifacts have helped with the creation of our project.
