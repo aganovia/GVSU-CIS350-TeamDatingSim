@@ -891,7 +891,7 @@ label haunted_house:
             finley "Have fun possibly dying. I'm gonna get some food."
             player_thinking "And with that, Finley unbothered-ly vacated the haunted house premises."
             hide badboy
-            hide tsundere
+            hide finley
             scene haunted house inside
             play music "music/unseen-horrors.mp3" loop fadein 1.0 fadeout 1.0
             player_thinking "As I enter the haunted house, I suddenly question the choice I made."
@@ -936,7 +936,7 @@ label haunted_house:
             player_thinking "And with that, Dominic almost comically skipped off into the darkness past the haunted house's front door."
             finley "I'm going to go get some cheese curds. You want to come or not?"
             player "Sure!"
-            hide tsundere
+            hide finley
             play music "music/the-show-must-be-go.mp3" loop fadein 1.0
             scene autumn trees
             show finley
@@ -950,7 +950,7 @@ label haunted_house:
             player "Nothing. These cheese curds are really good."
             finley "Of course they are. It's fried cheese. What could be better?"
             finley "I guess we should probably go make sure Dominic isn't dead."
-            hide tsundere
+            hide finley
             player_thinking "As we head back to the haunted house, I can still see Finley's soft smile in my head."
             stop music
 
